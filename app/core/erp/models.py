@@ -7,7 +7,7 @@ class Usuario(models.Model):
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
     nro_documento = models.CharField(max_length=150, verbose_name='Número del documento', unique=True)
     celular = models.CharField(max_length=150, verbose_name='Celular')
-    fecha_registro = models.DateTimeField(max_length=150, verbose_name='Fecha de registro')
+    fecha_registro = models.DateTimeField(max_length=150, verbose_name='Fecha de registro', null=True)
     genero = models.CharField(max_length=150, verbose_name='Genero')
     tipo = models.CharField(max_length=15, verbose_name='Tipo')
 
@@ -25,7 +25,7 @@ class Administrador(models.Model):
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
     nro_documento = models.CharField(max_length=150, verbose_name='Número del documento', unique=True)
     celular = models.CharField(max_length=150, verbose_name='Celular')
-    fecha_registro = models.DateTimeField(max_length=150, verbose_name='Fecha de registro')
+    fecha_registro = models.DateTimeField(max_length=150, verbose_name='Fecha de registro', null=True)
     genero = models.CharField(max_length=150, verbose_name='Genero')
 
     def __str__(self):

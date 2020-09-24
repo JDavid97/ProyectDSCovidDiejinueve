@@ -1,6 +1,12 @@
-from django.test import TestCase
 from app.wsgi import *
-from core.erp.models import Administrador
+from core.erp.models import *
+
+data = ['ererer']
+
+for i in data:
+    amd = Administrador(nombres=i)
+    amd.save()
+    print('Guardado registro N°{}'.format(amd.id))
 
 
 #OPERACIONES CRUD
