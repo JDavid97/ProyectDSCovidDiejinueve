@@ -40,6 +40,8 @@ class PacienteListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de pacientes'
+        context['url_crear'] = reverse_lazy('erp:paciente_crear')
+        context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
         #context['object_list'] = Administrador.objects.all()
         return context
 
@@ -50,8 +52,20 @@ class PacienteCrearView(CreateView):
     template_name = 'paciente/crearP.html'
     success_url = reverse_lazy('erp:paciente_listar')
 
+    # def post (self, request, *args, **kwargs):
+    #     form = PacienteForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return HttpResponseRedirect(self.success_url)
+    #     self.object = None
+    #     context = self.get_context_data(**kwargs)
+    #     context['form'] = form
+    #     return render(request, self.template_name, context)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Registrar paciente'
+        context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
+        context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
         #context['object_list'] = Administrador.objects.all()
         return context

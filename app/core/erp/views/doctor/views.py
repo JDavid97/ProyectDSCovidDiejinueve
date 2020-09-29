@@ -31,6 +31,8 @@ class DoctorListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de doctores'
+        context['url_crear'] = reverse_lazy('erp:doctor_crear')
+        context['doctor_slidebar'] = reverse_lazy('erp:doctor_listar')
         #context['object_list'] = Administrador.objects.all()
         return context
 
@@ -43,5 +45,7 @@ class DoctorCrearView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Registrar doctor'
+        context['cancelarcreardoctor'] = reverse_lazy('erp:doctor_listar')
+        context['doctor_slidebar'] = HttpResponseRedirect('doctor/listaD.html')
         #context['object_list'] = Administrador.objects.all()
         return context

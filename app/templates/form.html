@@ -1,5 +1,5 @@
 {% extends 'body.html' %}
-{% load widget_tweaks %}
+
 {% block content %}
 <form method="post">
     <div class="card card-default">
@@ -11,7 +11,8 @@
         </div>
         <div class="card-body">
             {% csrf_token %}
-            <input type="hidden" name="action" value="{{ action }}">
+
+            <!-- <input type="hidden" name="action" value="{{ action }}">  -->
             <!-- {% if form.errors %}
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -43,7 +44,7 @@
         <div class="card-footer">            
             {% block botton %}
 
-                {% endblock %}  
+            {% endblock %}  
             <button type="submit" class="btn btn-primary btn-flat btnTest">
                 <i class="fas fa-save"></i> Guardar registro
             </button>    
@@ -51,8 +52,7 @@
 
     </div>
 </form>
-
-<!-- <script>
+<script>
     {% if form.errors %}
         var errors = '';
         {% for field in form %}
@@ -61,34 +61,11 @@
             {% endfor %}
         {% endfor %}
         Swal.fire({
+            icon: 'error',
             title: 'Error!',
             text: errors,
-            icon: 'error'
-        });   
-
+        });
     {% endif %}
-
-    $('form').on('submit', function(e){
-        e.preventDefault();
-        var parameters = $(this).serializeArray();
-            $.ajax({
-                url: '{% url 'erp:paciente_crear' %}',
-                type: 'POST',
-                data: parameters,
-                dataType: 'json'
-            }).done(function (data) {
-                console.log(data);
-                if (!data.hasOwnProperty('error')) {
-                    location.href = '{{ url_listar }}';
-                    return false;
-                }
-                mensaje_error(data.error);
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus + ': ' + errorThrown);
-            }).always(function (data) {
-
-            });
-    });
-</script> -->
-
+    
+</script>
 {% endblock %}
