@@ -26,12 +26,12 @@
     <td>{{ c.genero }}</td>
     <td>{{ c.contagiado }}</td>
     <td>
-        <button type="button" class="btn btn-primary btn-xs btn-flat">
+        <a href="{% url 'erp:paciente_editar' c.id %}" class="btn btn-primary btn-xs btn-flat">
             <i class="fas fa-edit"></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-xs btn-flat">
+        </a>
+        <a href="{% url 'erp:paciente_borrar' c.id %}" class="btn btn-danger btn-xs btn-flat">
             <i class="fas fa-trash-alt"></i>
-        </button>
+        </a>
     </td>
 </tr>
 {% endfor %}

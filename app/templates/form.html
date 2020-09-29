@@ -1,7 +1,7 @@
 {% extends 'body.html' %}
 
 {% block content %}
-<form method="post">
+<form method="post" action="#">
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">
@@ -12,7 +12,7 @@
         <div class="card-body">
             {% csrf_token %}
 
-            <!-- <input type="hidden" name="action" value="{{ action }}">  -->
+            <input type="hidden" name="action" value="{{ action }}"> 
             <!-- {% if form.errors %}
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -45,7 +45,7 @@
             {% block botton %}
 
             {% endblock %}  
-            <button type="submit" class="btn btn-primary btn-flat btnTest">
+            <button type="submit" class="btn btn-primary btn-flat">
                 <i class="fas fa-save"></i> Guardar registro
             </button>    
         </div>
@@ -66,6 +66,35 @@
             text: errors,
         });
     {% endif %}
+
+    
+    // --- AJAX -----
+    //No funciona DESDE AQUI - VIDEO 29
+    // document.createElement('form').submit.call(document.frmGen)
+
+    /*$('form').on('submit', function (e) {
+        e.preventDefault();
+        // alert('x');
+        var parameters = $(this).serializeArray();
+        // console.log(parameters);
+            $.ajax({
+                url: '{% url 'erp:paciente_crear' %}',
+                type: 'POST',
+                data: parameters,
+                dataType: 'json'
+            }).done(function (data) {
+                if (!data.hasOwnProperty('error')) {
+                    Location.href = '{{ url_listar }}';
+                    return false;                    
+                }
+                mensaje_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ': ' + errorThrown);
+            }).always(function (data) {
+
+            }); 
+        });*/
+        // #--- AJAX -----
     
 </script>
 {% endblock %}
