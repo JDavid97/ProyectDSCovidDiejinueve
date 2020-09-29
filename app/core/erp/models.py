@@ -2,6 +2,8 @@ from django.db import models
 from django.db import models
 from datetime import datetime
 
+from django.forms import model_to_dict
+
 class Usuario(models.Model):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
@@ -50,6 +52,10 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nombres
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
     class Meta:
             verbose_name = 'Paciente'
             verbose_name_plural = 'Pacientes'
@@ -62,7 +68,7 @@ class Doctor(models.Model):
     nro_documento = models.CharField(max_length=150, verbose_name='Número del documento', unique=True)
     nro_celular = models.CharField(max_length=150, verbose_name='Celular')
     genero = models.CharField(max_length=150, verbose_name='Genero')
-    especialidad = models.BooleanField(max_length=150, verbose_name='Contagiado')
+    especialidad = models.CharField(max_length=150, verbose_name='Especialidad')
 
     def __str__(self):
         return self.nombres
