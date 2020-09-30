@@ -4149,6 +4149,7 @@ input[type="button"].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  transition: 0.5s;
 }
 
 .navbar-nav .nav-link {
@@ -4484,6 +4485,10 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid #e3e6f0;
   border-radius: 0.35rem;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .card > hr {
@@ -9799,7 +9804,7 @@ a:focus {
   height: 2.75rem;
   text-align: center;
   color: #fff;
-  background: rgba(90, 92, 105, 0.5);
+  background: rgba(35, 133, 245, 0.822);
   line-height: 46px;
 }
 
