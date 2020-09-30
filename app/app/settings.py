@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #libs
-    #'widget_tweaks'
+    # 'widget_tweaks',
     # Apps
-    'core.erp'
+    'core.erp',
+    'core.homepage',
+    'core.login'
 ]
 
 MIDDLEWARE = [
@@ -115,6 +117,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_FINDERS =[
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+
+LOGIN_REDIRECT_URL = '/cvd/paciente/lista/'

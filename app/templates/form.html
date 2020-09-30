@@ -5,13 +5,18 @@
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">
-                <i class="fas fa-user-plus"></i>
+                {% if  action  == 'edit' %}
+                <i class="fas fa-edit"></i>                    
+                {% endif %}
+
+                {% if action == 'crear' %}
+                    <i class="fas fa-plus"></i>
+                {% endif %}
                 {{ title }}              
             </h3>
         </div>
         <div class="card-body">
             {% csrf_token %}
-
             <input type="hidden" name="action" value="{{ action }}"> 
             <!-- {% if form.errors %}
             <div class="alert alert-danger alert-dismissible">
@@ -59,6 +64,9 @@
             {% for error in field.errors %}
                 errors += '{{ error }}\n';
             {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            errors += '{{ error }}\n\n';  
         {% endfor %}
         Swal.fire({
             icon: 'error',

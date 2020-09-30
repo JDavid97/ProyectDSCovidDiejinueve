@@ -45,9 +45,14 @@ class PacienteForm(ModelForm):
             ),            
         }
         
+    def clean(self):
+        cleaned = super().clean()
+        if len(cleaned['nombres']) <= 2:
+            raise forms.ValidationError('Le faltan caracteres en el nombre')
+            # self.add_error('nombres', 'Le faltan caracteres en el nombre')
+        return cleaned
 
 class DoctorForm(ModelForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # for form in self.visible_fields():
@@ -90,3 +95,4 @@ class DoctorForm(ModelForm):
                 }
             ), 
         }
+

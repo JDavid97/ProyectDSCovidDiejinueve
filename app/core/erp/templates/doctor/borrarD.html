@@ -1,33 +1,6 @@
-{% extends 'body.html' %}
-
-{% block content %}
-<form method="post" action="#">
-    <div class="card card-default">
-        <div class="card-header">
-            <h3 class="card-title">
-                <i class="fas fa-user-minus"></i>
-                {{ title }}              
-            </h3>
-        </div>
-        <div class="card-body">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="{{ action }}"> 
-
-
-            <div class="alert alert-danger alert-dismissible">
-                <h5><i class="icon fas fa-ban"></i> Notificación!</h5>
-                ¿Estas seguro de eliminar el registro con nombre: {{ object.nombres }}?
-            </div>
-        </div>
-        <div class="card-footer">          
-            <a href="{{ cancelarcreardoctor }}" class="btn btn-info btn-flat">
-                <i class="fas fa-window-close"></i> Cancelar
-            </a>  
-            <button type="submit" class="btn btn-primary btn-flat">
-                <i class="fas fa-save"></i> Si, aceptar
-            </button>                
-        </div>
-
-    </div>
-</form>
+{% extends 'borrar.html' %}
+{% block botton %}
+<a href="{{ cancelarcreardoctor }}" class="btn btn-info btn-flat">
+    <i class="fas fa-window-close"></i> Cancelar
+</a>  
 {% endblock %}

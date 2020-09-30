@@ -3,20 +3,13 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.utils.decorators import method_decorator
 
 
 from core.erp.forms import PacienteForm
 from core.erp.models import Paciente, Administrador
 
-
-def lista_paciente(request):
-    data = {
-        'title': 'Listado de pacientes',
-        'pacientes': Paciente.objects.all()
-    }
-    return render(request, 'paciente/lista.html', data)
 
 
 class PacienteListView(ListView):
@@ -90,13 +83,14 @@ class PacienteCrearView(CreateView):
         context['title'] = 'Registrar paciente'
         context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
         context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
-        context['action'] = 'add'
+        context['action'] = 'crear'
         
         #context['object_list'] = Administrador.objects.all()
         return context
 
 
 class PacienteUpdateView(UpdateView):
+    
     model = Paciente
     form_class = PacienteForm
     template_name = 'paciente/crearP.html'
@@ -121,20 +115,58 @@ class PacienteUpdateView(UpdateView):
         context['title'] = 'Editar paciente'
         context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
         context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
-        context['action'] = 'add'
+        context['action'] = 'edit'
         
         #context['object_list'] = Administrador.objects.all()
         return context
 
 class PacienteDeleteView(DeleteView):
+
     model = Paciente
     template_name = 'paciente/borrarP.html'
     success_url = reverse_lazy('erp:paciente_listar')
+
+    # AJAX
+    # @method_decorator(csrf_exempt)
+    # def dispatch(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     return super().dispatch(request, *args, **kwargs)
+
+    # def post(self, request, *args, **kwargs):
+    #     data = {}
+    #     try:
+    #         self.object.delete()
+    #     except Exception as e:
+    #         data['error'] = str(e)
+        
+    #     return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Eliminar paciente'    
         context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
         context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
+
+        return context
+
+
+class PacienteFormView(FormView):
+    form_class = PacienteForm
+    template_name = 'paciente/crearP.html'
+    success_url = reverse_lazy('erp:paciente_listar')
+
+    def form_valid(self, form):
+        return super().form_invalid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Formulario | Paciente'    
+        context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
+        context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
+        context['url_listar'] = reverse_lazy('erp:paciente_listar')
+        context['action'] = 'crear'
 
         return context

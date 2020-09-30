@@ -9,15 +9,6 @@ from django.utils.decorators import method_decorator
 from core.erp.forms import DoctorForm
 from core.erp.models import Doctor
 
-
-def lista_doctor(request):
-    data = {
-        'title': 'Listado de doctores',
-        'doctores': Doctor.objects.all()
-    }
-    return render(request, 'doctor/listaD.html', data)
-
-
 class DoctorListView(ListView):
     model = Doctor
     template_name = 'doctor/listaD.html'
@@ -36,6 +27,7 @@ class DoctorListView(ListView):
         #context['object_list'] = Administrador.objects.all()
         return context
 
+
 class DoctorCrearView(CreateView):
     model = Doctor
     form_class = DoctorForm
@@ -47,6 +39,7 @@ class DoctorCrearView(CreateView):
         context['title'] = 'Registrar doctor'
         context['cancelarcreardoctor'] = reverse_lazy('erp:doctor_listar')
         context['doctor_slidebar'] = HttpResponseRedirect('doctor/listaD.html')
+        context['action'] = 'crear'
         #context['object_list'] = Administrador.objects.all()
         return context
 
@@ -62,10 +55,11 @@ class DoctorEditView(UpdateView):
         context['title'] = 'Editar doctor'
         context['cancelarcreardoctor'] = reverse_lazy('erp:doctor_listar')
         context['doctor_slidebar'] = reverse_lazy('erp:doctor_listar')
-        context['action'] = 'add'
+        context['action'] = 'edit'
         
         #context['object_list'] = Administrador.objects.all()
         return context
+
 
 class DoctorDeleteView(DeleteView):
     model = Doctor
