@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import FormView
 # Create your views here.
 
 class LoginFormView(LoginView):

@@ -128,3 +128,4 @@ STATICFILES_DIRS = [
 
 
 LOGIN_REDIRECT_URL = '/cvd/paciente/lista/'
+LOGOUT_REDIRECT_URL = '/login/'

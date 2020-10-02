@@ -14,22 +14,22 @@
 {% endblock %}
 
 {% block content %}
-<div class="card card-default">
-    <div class="card-header">
-        <h3 class="card-title">
-            <i class="fas fa-search"></i>
-            {{ title }}
-        </h3>
-    </div>
-    <div class="card-body">
-        <table class="table" id="data">
-            <thead>
-                {% block columns %}
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-search"></i>
+                {{ title }}
+            </h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="data">
+                <thead>
+                    {% block columns %}
 
-                {% endblock %}
-            </thead>
-            <tbody>
-                {% block rows %}
+                    {% endblock %}
+                </thead>
+                <tbody>
+                    {% block rows %}
 
                     {% endblock %}
                 </tbody>
@@ -40,16 +40,7 @@
                 <i class="fas fa-plus"></i> Nuevo registro
             </a>
         </div>
-                {% endblock %}
-            </tbody>
-        </table>
     </div>
-    <div class="card-footer">
-        <button class="btn btn-primary btn-flat">
-            <i class="fas fa-plus"></i> Nuevo registro
-        </button>
-    </div>
-</div>
 {% endblock %}
 
 {% block javascript %}
@@ -91,27 +82,4 @@
         });
     });
     </script>
-
-<script type="application/javascript">
-    $(document).ready(function() {    
-    $('#data').DataTable({
-    //para cambiar el lenguaje a español
-        "language": {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            }
-    });     
-});
-</script>
 {% endblock %}

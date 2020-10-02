@@ -12,6 +12,7 @@
   <meta name="author" content="">
 
   <title>{{ title }}</title>
+  <link href="{% static 'img/favicon1.png' %}" rel="icon">
   <!-- Custom styles for this template-->
   <link href="{% static 'lib/startbootstrap-landing-page-gh-pages/css/sb-admin-2.min.css' %}" rel="stylesheet">
   <link href="{% static 'lib/startbootstrap-landing-page-gh-pages/css/sb-admin-2.css' %}" rel="stylesheet">
@@ -38,12 +39,10 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-              <div class="col-lg-6">
+              <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Acceder</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Iniciar sesión en Covid Diejinueve</h1>
                   </div>        
                   <form action="#" method="post">
                     {% csrf_token %}
@@ -60,14 +59,13 @@
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i>
-                      Iniciar sesión
+                      Acceder
                     </button>
                                     
                   </form>
                                     
                 </div>
-              </div>
-            </div>
+
 
 
           </div>

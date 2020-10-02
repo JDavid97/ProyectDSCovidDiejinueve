@@ -7,19 +7,46 @@
       <i class="fa fa-bars"></i>
     </button>
 
-    <!-- Topbar Navbar -->
+    <!-- <li class="nav_item">
+      <a class="nav-link" href="#">
+        <i class="fas fa-power-off" aria-hidden="true"></i>
+      </a>
+    </li> -->
     <ul class="navbar-nav ml-auto">                     
-      
-      <div class="topbar-divider d-none d-sm-block"></div>
-
-      <!-- Nav Item - User Information -->
-      <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-          <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+      <!-- <li class="nav-item dropdown no-arrow">
+        <a class="nav-link">
+          <i class="fas fa-userg-cog"></i> {{ request.user.username }}
         </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"> -->
+          <!-- <span class="dropdown-header" style="font-size: 12px;">
+              Sú último acceso fue {{ request.user.last_login }}
+          </span> -->
+          <!-- <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+              <i class="fas fa-edit mr-2"></i> Editar perfil
+              <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+              <i class="fas fa-lock mr-2"></i> Editar password
+              <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+      </li> -->
+      <a class="nav-link">
+        <i class="fas fa-userg-cog"></i> {{ request.user.username }}
+      </a>
+      <div class="topbar-divider d-none d-sm-block"></div>
+      <a class="nav-link" href="{% url 'logout' %}">
+        <i class="fas fa-power-off" aria-hidden="true"></i>
+      </a>
+      <!-- Nav Item - User Information -->
+      <!-- <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+          <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+        </a> -->
         <!-- Dropdown - User Information -->
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
           <a class="dropdown-item" href="#">
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             Profile
@@ -38,9 +65,9 @@
             Logout
           </a>
         </div>
-      </li>
+      </li> -->
 
-    </ul>
+    </ul> 
 
   </nav>
   <!-- End of Topbar -->
