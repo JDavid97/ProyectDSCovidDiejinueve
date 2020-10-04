@@ -18,6 +18,11 @@
                 {% include 'header.html' %}
 
                 <div class="content-wrapper">
+
+                    {% block dashboard %}
+                        
+                    {% endblock %}
+                    
                     {% block content %}
 
                     {% endblock %}

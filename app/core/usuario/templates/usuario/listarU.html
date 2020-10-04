@@ -1,0 +1,35 @@
+{% extends 'lista.html' %}
+{% load static %}
+<!-- {% block head_list %}
+    <script src="{% static 'usuario/js/list.js' %}"></script>
+{% endblock %} -->
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 5%;">Nro</th>
+        <th scope="col" style="width: 20%;">Nombres</th>
+        <th scope="col" style="width: 20%;">Username</th>
+        <th scope="col" style="width: 20%;">Fecha de registro</th>        
+        <th scope="col" style="width: 15%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.first_name }}</td>
+    <td>{{ c.username }}</td>
+    <td>{{ c.date_joined }}</td>
+    <td>
+        <a href="#" class="btn btn-primary btn-xs btn-flat">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="#" class="btn btn-danger btn-xs btn-flat">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+<p></p>
+{% endblock %}

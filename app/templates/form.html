@@ -1,7 +1,7 @@
 {% extends 'body.html' %}
-
+{% load static %}
 {% block content %}
-<form method="post" action="#">
+<form id="miform" method="post" action="#">
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">
@@ -50,7 +50,7 @@
             {% block botton %}
 
             {% endblock %}  
-            <button type="submit" class="btn btn-primary btn-flat">
+            <button id="boton11" type="submit" class="btn btn-primary btn-flat">
                 <i class="fas fa-save"></i> Guardar registro
             </button>    
         </div>
@@ -75,7 +75,17 @@
         });
     {% endif %}
 
+    // $("#miform").submit(function(event) {
+        // $.alert({
+        // title: 'Alert!',
+        // content: 'Simple alert!',
+        // });
+
+
+        
+
     
+    // alert_jqueryconfirm();
     // --- AJAX -----
     //No funciona DESDE AQUI - VIDEO 29
     // document.createElement('form').submit.call(document.frmGen)

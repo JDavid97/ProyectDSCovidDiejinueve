@@ -1,6 +1,7 @@
 from django.urls import path
 from core.erp.views.paciente.views import *
 from core.erp.views.doctor.views import *
+from core.erp.views.dashboard.views import *
 
 app_name = 'erp'
 
@@ -15,4 +16,7 @@ urlpatterns = [
     path('doctor/crear/', DoctorCrearView.as_view(), name='doctor_crear'),
     path('doctor/editar/<int:pk>/', DoctorEditView.as_view(), name='doctor_editar'),
     path('doctor/borrar/<int:pk>/', DoctorDeleteView.as_view(), name='doctor_borrar'),
+    
+    #Home
+    path('inicio/', DashboardView.as_view(), name='dashboard'),
 ]

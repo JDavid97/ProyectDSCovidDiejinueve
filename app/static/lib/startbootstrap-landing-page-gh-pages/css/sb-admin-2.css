@@ -638,7 +638,7 @@ pre code {
   position: relative;
   width: 100%;
   padding-right: 0.75rem;
-  padding-left: 0.75rem;
+  padding-left: 3.75rem;
 }
 
 .col {
@@ -906,7 +906,7 @@ pre code {
   }
   .col-sm-6 {
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 100%;
   }
   .col-sm-7 {
     flex: 0 0 58.33333%;
@@ -1425,6 +1425,11 @@ pre code {
     flex: 0 0 83.33333%;
     max-width: 49.33333%;
     margin-top: 200px;
+  }
+  .col-xl-101 {
+    flex: 0 0 83.33333%;
+    max-width: 60.33333%;
+    margin-top: 100px;
   }
   .col-xl-11 {
     flex: 0 0 91.66667%;
@@ -2342,11 +2347,33 @@ textarea.form-control {
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
+  padding: 0.475rem 0.75rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.80rem;
   font-family: monospace; 
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn1 {
+  display: inline-block;
+  font-weight: 400;
+  color: #858796;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.475rem 0.75rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-left: 143px;
+  border-radius: 0.80rem;
+  font-family: monospace; 
+  width: 200px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -4489,9 +4516,25 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid #e3e6f0;
-  border-radius: 0.35rem;
-  margin-left: 40px;
-  margin-right: 40px;
+  border-radius: 1.35rem;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.card1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 1.35rem;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-top: 40px;
   margin-bottom: 40px;
 }

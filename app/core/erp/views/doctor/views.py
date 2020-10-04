@@ -13,6 +13,10 @@ class DoctorListView(ListView):
     model = Doctor
     template_name = 'doctor/listaD.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
+
     #@method_decorator(csrf_exempt)
     # def dispatch(self, request, *args, **kwargs):
     #     if request.method == 'GET':
@@ -34,6 +38,10 @@ class DoctorCrearView(CreateView):
     template_name = 'doctor/crearD.html'
     success_url = reverse_lazy('erp:doctor_listar')
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Registrar doctor'
@@ -50,6 +58,10 @@ class DoctorEditView(UpdateView):
     template_name = 'doctor/crearD.html'
     success_url = reverse_lazy('erp:doctor_listar')
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Editar doctor'
@@ -65,6 +77,10 @@ class DoctorDeleteView(DeleteView):
     model = Doctor
     template_name = 'doctor/borrarD.html'
     success_url = reverse_lazy('erp:doctor_listar')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

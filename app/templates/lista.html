@@ -5,11 +5,12 @@
     <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/DataTables-1.10.22/css/dataTables.bootstrap4.min.css' %}"/>
     
     <script type="text/javascript" src="{% static 'lib/dataTables/datatables.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/DataTables/datatables.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/DataTables/DataTables-1.10.22/css/dataTables.bootstrap4.min.css' %}" />
 
+    {% block head_list %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'lib/DataTables/datatables.min.css' %}" />
-<link rel="stylesheet" type="text/css"
-    href="{% static 'lib/DataTables/DataTables-1.10.22/css/dataTables.bootstrap4.min.css' %}" />
+    {% endblock %}
 
 {% endblock %}
 
@@ -47,6 +48,7 @@
     <script type="application/javascript">
     $(document).ready(function() {
         $('#data').DataTable({
+        "destroy": true,
         "language": {
             "lengthMenu":     "Mostrar _MENU_ registros",
             "zeroRecords":    "No se encontraron resultados",
@@ -64,13 +66,17 @@
                  "sPrevious": "Anterior"
             },
             "sProcessing": "Procesando..."
-            }
+            }           
         });
+
+        // $.fn.DataTable.ext.errMode = 'throw';
+
+
         $('.btnTest').on('click', function () {
             $.ajax({
                 url: '{% url 'erp:paciente_listar' %}',
                 type: 'POST',
-                data: {id: 1},
+                data: '',
                 dataType: 'json'
             }).done(function (data) {
                 // console.log(data)

@@ -39,9 +39,15 @@
       <h1>Bienvenido a Covid Diejinueve</h1>
       <!-- <h2>Please, fill out the for below to be notified for the latest updates!</h2> -->
 
-      <form action="forms/notify.php" method="post" role="form" class="php-email-form">
-        <div class="text-center"><a href="{% url 'login' %}" type="submit"><i class="fas fa-sign-in-alt"></i>Ingresar</a></div>
-      </form>
+      {%if request.user.is_authenticated %}
+        <a href="{% url 'erp:dashboard' %}">
+          <i class="bx bx-user"></i> Logueado como {{ request.user.username}}
+        </a> 
+      {% else %}
+        <form action="forms/notify.php" method="post" role="form" class="php-email-form">
+          <div class="text-center"><a href="{% url 'login' %}" type="submit"><i class="fas fa-sign-in-alt"></i>Ingresar</a></div>
+        </form>
+      {% endif %}
     </div>
   </section><!-- #hero -->
 

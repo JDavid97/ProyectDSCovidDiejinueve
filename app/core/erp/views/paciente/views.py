@@ -17,6 +17,7 @@ class PacienteListView(ListView):
     template_name = 'paciente/lista.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)   
 
@@ -78,6 +79,10 @@ class PacienteCrearView(CreateView):
     #     context['form'] = form
     #     return render(request, self.template_name, context)
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)   
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Registrar paciente'
@@ -109,6 +114,10 @@ class PacienteUpdateView(UpdateView):
     #         data['error'] = str(e)
         
     #     return JsonResponse(data)
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -154,6 +163,10 @@ class PacienteFormView(FormView):
     form_class = PacienteForm
     template_name = 'paciente/crearP.html'
     success_url = reverse_lazy('erp:paciente_listar')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)  
 
     def form_valid(self, form):
         return super().form_invalid(form)

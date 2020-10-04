@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     # Apps
     'core.erp',
     'core.homepage',
-    'core.login'
+    'core.login',
+    'core.usuario'
 ]
 
 MIDDLEWARE = [
@@ -127,5 +128,9 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_REDIRECT_URL = '/cvd/paciente/lista/'
+LOGIN_REDIRECT_URL = '/cvd/inicio/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+LOGIN_URL = '/login/'
+
+AUTH_USER_MODEL = 'usuario.Usuario'
