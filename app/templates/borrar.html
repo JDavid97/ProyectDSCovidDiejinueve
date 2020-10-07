@@ -16,45 +16,20 @@
 
             <div class="alert alert-danger alert-dismissible">
                 <h5><i class="icon fas fa-ban"></i> Notificación!</h5>
-                ¿Estas seguro de eliminar el registro con nombre: {{ object.nombres }}?
+                {% block nombre %} {% endblock %}?
             </div>
         </div>
         <div class="card-footer">          
             {% block botton %}
 
             {% endblock %}
-            <button type="submit" class="btn btn-primary btn-flat">
-                <i class="fas fa-save"></i> Si, aceptar
-            </button>                
+            <button id="btnAcept" type="submit" class="btn btn-primary btn-flat">
+                <i class="fas fa-save"></i> Si, aceptar                
+            </button>  
+                        
         </div>
 
     </div>
 </form>
 
-
-<!-- <script>  AJAX --------------
-    $('form').on('submit', function (e) {
-        e.preventDefault();
-        // alert('x');
-        //var parameters = $(this).serializeArray();
-        // console.log(parameters);
-            $.ajax({
-                url: window.location.pathname,
-                type: 'POST',
-                data: {},
-                dataType: 'json'
-            }).done(function (data) {
-                if (!data.hasOwnProperty('error')) {
-                    Location.href = '{{ url_listar }}';
-                    return false;                    
-                }
-                mensaje_error(data.error);
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus + ': ' + errorThrown);
-            }).always(function (data) {
-
-            }); 
-        });
-    
-</script> -->
 {% endblock %}

@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crum.CurrentRequestUserMiddleware'
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -127,8 +128,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
 LOGIN_REDIRECT_URL = '/cvd/inicio/'
+
 LOGOUT_REDIRECT_URL = '/login/'
 
 LOGIN_URL = '/login/'

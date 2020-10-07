@@ -20,7 +20,7 @@ from core.login.views import *
 from core.usuario.views import *
 
 urlpatterns = [
-    path('', IndexView.as_view()),
+    path('', IndexView.as_view(), name = 'index'),
     path('login/', LoginFormView.as_view(), name = 'login'),
     path('login/logout/', LogoutView.as_view(next_page='login'), name = 'logout'),
     path('admin/', admin.site.urls),

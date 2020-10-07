@@ -14,7 +14,7 @@ from core.usuario.models import Usuario
 
 # Create your views here.
 
-class UsuarioListarView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
+class UsuarioListarView(LoginRequiredMixin, ListView):
     model = Usuario
     template_name = 'usuario/listarU.html'
     # permission_required = 'usuario.view_usuario'
@@ -23,12 +23,26 @@ class UsuarioListarView(LoginRequiredMixin, ValidatePermissionRequiredMixin, Lis
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                for i in Usuario.objects.all():
+                    data.append(i.toJSON())
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de Usuarios'
-        # context['url_crear'] = reverse_lazy('user:user_create')
+        context['url_crear'] = reverse_lazy('usuario:usuario_crear')
         context['url_listar'] = reverse_lazy('usuario:usuario_listar')
+        
         # context['entity'] = 'Usuarios'
         return context
 
@@ -38,40 +52,116 @@ class UsuarioCrearView(CreateView):
     template_name = 'usuario/crearU.html'
     success_url = reverse_lazy('login')
     permission_required = 'usuario.add_usuario'
-    # url_redirect = success_url
 
-    #--- AJAX -----
-    # def post(self, request, *args, **kwargs):
-    #     data = {}
 
-    #     try:
-    #         action = request.POST['action']
-    #         if action == 'crear':
-    #             form = self.get_form()
-    #             if form.is_valid():
-    #                 form.save()
-    #             else:
-    #                 data['error'] = form.errors
-    #         else:
-    #             data['error'] = 'No ha ingresado ninguna opcioón'
-    #         data = Usuario.objects.get(pk=request.POST['id']).toJSON           
-    #     except Exception as e:
-    #         data['errorasdasdasd'] = str(e)
-        
-    #     return JsonResponse(data)
-    
-    # def dispatch(self, request, *args, **kwargs):
-    #     return super().dispatch(request, *args, **kwargs)   
-    #--- AJAX -----
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Crear cuenta'
         context['cancelarcrearusuario'] = reverse_lazy('login')
+        context['usuario_registro'] = reverse_lazy('usuario_registro')
         # context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
         
         # context['url_listar'] = self.success_url
         context['action'] = 'crear'
         
         #context['object_list'] = Administrador.objects.all()
+        return context
+
+class UsuarioCrearView2(CreateView):
+    model = Usuario
+    form_class = UsuarioForm
+    template_name = 'usuario/crearU2.html'
+    success_url = reverse_lazy('usuario:usuario_listar')
+    permission_required = 'usuario.add_usuario'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    # def post(self, request, *args, **kwargs):
+    #     data = {}
+    #     try:
+    #         action = request.POST['action']
+    #         if action == 'crear':
+    #             form = self.get_form()
+    #             data = form.save()
+    #         else:
+    #             data['error'] = 'No ha ingresado a ninguna opción'
+    #     except Exception as e:
+    #         data['error'] = str(e)
+    #     return JsonResponse(data)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Crear usuario'      
+        context['cancelarcrearusuario2'] = reverse_lazy('usuario:usuario_listar')
+        context['url_crear'] = reverse_lazy('usuario:usuario_crear2')
+        context['url_listar'] = reverse_lazy('usuario:usuario_listar')
+        context['action'] = 'crear'
+        
+        #context['object_list'] = Administrador.objects.all()
+        return context
+
+
+class UsuarioEditarView(LoginRequiredMixin, UpdateView):
+    model = Usuario
+    form_class = UsuarioForm
+    template_name = 'usuario/crearU2.html'
+    success_url = reverse_lazy('usuario:usuario_listar')
+    permission_required = 'usuario.change_usuario'
+    url_redirect = success_url
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    # def post(self, request, *args, **kwargs):
+    #     data = {}
+    #     try:
+    #         action = request.POST['action']
+    #         if action == 'editar':
+    #             form = self.get_form()
+    #             data = form.save()
+    #         else:
+    #             data['error'] = 'No ha ingresado a ninguna opción'
+    #     except Exception as e:
+    #         data['error'] = str(e)
+    #     return JsonResponse(data) 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Editar usuario'
+        context['cancelarcrearusuario2'] = reverse_lazy('usuario:usuario_listar')        
+        # context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
+        
+        # context['url_listar'] = self.success_url
+        context['action'] = 'editar'
+        
+        #context['object_list'] = Administrador.objects.all()
+        return context
+
+class UsuarioDeleteView(DeleteView):
+
+    model = Usuario
+    template_name = 'usuario/borrarU.html'
+    permission_required = 'usuario.delete_usuario'
+    success_url = reverse_lazy('usuario:usuario_listar')
+
+    # AJAX
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+      
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Eliminar usuario'    
+        context['paciente_slidebar'] = reverse_lazy('usuario:usuario_listar')
+        context['cancelarcrearusuario'] = reverse_lazy('usuario:usuario_listar')
+
         return context

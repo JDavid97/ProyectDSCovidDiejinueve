@@ -1,4 +1,4 @@
-from app.wsgi import *
+#from app.wsgi import *
 from core.erp.models import *
 
 data = ['ererer']

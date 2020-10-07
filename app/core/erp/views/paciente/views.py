@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -9,27 +10,35 @@ from django.utils.decorators import method_decorator
 
 from core.erp.forms import PacienteForm
 from core.erp.models import Paciente, Administrador
+from core.erp.mixins import IsSuperuserMixin
 
 
 
-class PacienteListView(ListView):
+class PacienteListView(LoginRequiredMixin, ListView):
+    # permisio
     model = Paciente
     template_name = 'paciente/lista.html'
 
     @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
+    # @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)   
 
     def post(self, request, *args, **kwargs):
         data = {}
-
         try:
-            data = Paciente.objects.get(pk=request.POST['id']).toJSON
+            action = request.POST['action']
+            if action == ['searchdata']:
+                data = []
+                for i in Paciente.objects.all():
+                    
+                    data.append(i.toJSON())
+            else:
+                data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
         
-        return JsonResponse(data)
+        return JsonResponse(data, safe=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,7 +50,7 @@ class PacienteListView(ListView):
         return context
 
 
-class PacienteCrearView(CreateView):
+class PacienteCrearView(LoginRequiredMixin, CreateView):
     model = Paciente
     form_class = PacienteForm
     template_name = 'paciente/crearP.html'
@@ -79,7 +88,7 @@ class PacienteCrearView(CreateView):
     #     context['form'] = form
     #     return render(request, self.template_name, context)
 
-    @method_decorator(login_required)
+    # @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)   
 
@@ -155,6 +164,7 @@ class PacienteDeleteView(DeleteView):
         context['title'] = 'Eliminar paciente'    
         context['paciente_slidebar'] = reverse_lazy('erp:paciente_listar')
         context['cancelarcrearpaciente'] = reverse_lazy('erp:paciente_listar')
+        context['url_listar'] = reverse_lazy('erp:paciente_listar')
 
         return context
 

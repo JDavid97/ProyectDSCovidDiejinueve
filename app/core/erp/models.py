@@ -1,25 +1,11 @@
+
 from django.db import models
 from datetime import datetime
 
 from django.forms import model_to_dict
+from core.models import BaseModel
+from crum import get_current_request, get_current_user
 
-class Usuario(models.Model):
-    nombres = models.CharField(max_length=150, verbose_name='Nombres')
-    apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
-    nro_documento = models.CharField(max_length=150, verbose_name='Número del documento', unique=True)
-    celular = models.CharField(max_length=150, verbose_name='Celular')
-    fecha_registro = models.DateTimeField(max_length=150, verbose_name='Fecha de registro', null=True)
-    genero = models.CharField(max_length=150, verbose_name='Genero')
-    tipo = models.CharField(max_length=15, verbose_name='Tipo')
-
-    def __str__(self):
-        return self.nombres
-
-    class Meta:
-            verbose_name = 'Usuario'
-            verbose_name_plural = 'Usuarios'
-            db_table = 'usuario'
-            ordering = ['id']
 
 class Administrador(models.Model):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
@@ -39,7 +25,7 @@ class Administrador(models.Model):
             ordering = ['id']
 
 
-class Paciente(models.Model):
+class Paciente(BaseModel):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
     nro_documento = models.CharField(max_length=150, verbose_name='Número del documento', unique=True)
@@ -51,8 +37,18 @@ class Paciente(models.Model):
     def __str__(self):
         return self.nombres
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        usuario = get_current_user()
+        if usuario is not None:
+            if not usuario.pk:
+                self.usuario_creacion = usuario
+            else:
+                self.usuario_actualizacion = usuario
+        super(Paciente, self).save()
+
     def toJSON(self):
-        item = model_to_dict(self)
+        item = model_to_dict(self, exclude=['date_actualizacion', 'date_creacion', 'usuario_actualizacion', 'usuario_creacion'])
+        # item['fecha_registro'] = self.date_joined.strftime('%Y-%m-%d')
         return item
 
     class Meta:

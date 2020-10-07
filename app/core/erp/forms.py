@@ -44,6 +44,7 @@ class PacienteForm(ModelForm):
                 }
             ),            
         }
+        exclude = ['usuario_actalizacion', 'usuario_creacion', 'date_actualizacion']
         
     def clean(self):
         cleaned = super().clean()

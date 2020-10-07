@@ -34,7 +34,7 @@ class UsuarioForm(ModelForm):
                     'placeholder': 'Usuario',
                 }
             ),    
-            'password': PasswordInput(
+            'password': PasswordInput(render_value=True,
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Password',

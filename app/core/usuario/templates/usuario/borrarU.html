@@ -1,10 +1,11 @@
 {% extends 'borrar.html' %}
 
 {% block botton %}
-<a href="{{ cancelarcrearpaciente }}" class="btn btn-info btn-flat">
+<a href="{{ cancelarcrearusuario }}" class="btn btn-info btn-flat">
     <i class="fas fa-window-close"></i> Cancelar
 </a>  
 {% endblock %}
 {% block nombre %}  
-¿Estas seguro de eliminar el paciente: {{ object.nombres }}
+¿Estas seguro de eliminar el usuario: {{ object.username }}
 {% endblock %}
+

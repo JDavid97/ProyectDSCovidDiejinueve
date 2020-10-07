@@ -1,7 +1,7 @@
 {% extends 'body.html' %}
 {% load static %}
 {% block content %}
-<form id="miform" method="post" action="#">
+<form id="form" method="post" action="#">
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">
@@ -58,6 +58,13 @@
     </div>
 </form>
 <script>
+    // $("#form").on('submit', function(e) {
+    //         $.alert({
+    //         title: 'Alert!',
+    //         content: 'Simple alert!',
+    //         });
+
+
     {% if form.errors %}
         var errors = '';
         {% for field in form %}
@@ -75,11 +82,7 @@
         });
     {% endif %}
 
-    // $("#miform").submit(function(event) {
-        // $.alert({
-        // title: 'Alert!',
-        // content: 'Simple alert!',
-        // });
+    
 
 
         
