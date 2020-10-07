@@ -77,7 +77,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = db.POSTGRESQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'qwdyebay',
+        'USER': 'qwdyebay',
+        'PASSWORD': 'MlldGlVRZHaKxl3OXt696Ee1BZzOyXlh',
+        'HOST': 'lallah.db.elephantsql.com ',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
