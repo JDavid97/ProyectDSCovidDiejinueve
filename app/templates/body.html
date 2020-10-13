@@ -50,53 +50,53 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Esta seguro de cerrar la sesión?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Seleccione "Salir" si está seguro de finalizar su sesión actual.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="{% url 'logout' %}">Salir</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
-        <script
-            src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
-        </script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery-easing/jquery.easing.min.js' %}">
-        </script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/sb-admin-2.min.js' %}"></script>        
-
-        <!-- Page level plugins -->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/chart.js/Chart.min.js' %}"></script>
-
-        <!-- Page level custom scripts -->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-area-demo.js' %}"></script>
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-pie-demo.js' %}"></script>
-
-        <!-- Bootstrap core JavaScript-->
-        <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
-        <script
-            src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
-        </script>
-
-        <script type="text/javascript" src="{% static 'lib/DataTables/datatables.min.js' %}"></script>
-
-            <!-- Page level custom scripts -->
-            <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-area-demo.js' %}"></script>
-            <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-pie-demo.js' %}"></script>
-
-            <script type="text/javascript" src="{% static 'lib/datatables-1.10.20/datatables.min.js' %}"></script>
+         <!-- Bootstrap core JavaScript-->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
+         <script
+             src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
+         </script>
+ 
+         <!-- Core plugin JavaScript-->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery-easing/jquery.easing.min.js' %}">
+         </script>
+ 
+         <!-- Custom scripts for all pages-->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/sb-admin-2.min.js' %}"></script>        
+ 
+         <!-- Page level plugins -->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/chart.js/Chart.min.js' %}"></script>
+ 
+         <!-- Page level custom scripts -->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-area-demo.js' %}"></script>
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-pie-demo.js' %}"></script>
+ 
+         <!-- Bootstrap core JavaScript-->
+         <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
+         <script
+             src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
+         </script>
+ 
+         <script type="text/javascript" src="{% static 'lib/DataTables/datatables.min.js' %}"></script>
+ 
+             <!-- Page level custom scripts -->
+             <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-area-demo.js' %}"></script>
+             <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/demo/chart-pie-demo.js' %}"></script>
+ 
+             <script type="text/javascript" src="{% static 'lib/datatables-1.10.20/datatables.min.js' %}"></script>
     
             <!-- Block javascript-->  
     </div>

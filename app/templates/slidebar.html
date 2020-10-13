@@ -40,7 +40,12 @@
           <h6 class="collapse-header">Modulo usuario:</h6>
           <a href="{% url 'erp:paciente_listar' %}" class="collapse-item" href="buttons.html">Paciente</a>
           <a href="{% url 'erp:doctor_listar' %}" class="collapse-item" href="cards.html">Doctor</a>
+          {% for g in request.user.groups.all %}
+          {% if g.name == "doctor" or g.name == "Administrador" %}  
           <a href="{% url 'usuario:usuario_listar' %}" class="collapse-item" href="cards.html">Usuarios</a>
+          {% endif %}
+          {% endfor %}          
+          
         </div>
       </div>
     </li>
@@ -62,7 +67,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'erp:dashboard' %}">
+      <a class="nav-link" href="{% url 'chat:chat_view' %}">
           
           <i class="fas fa-comments"></i>
         <span>Chat</span></a>
@@ -70,7 +75,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'erp:dashboard' %}">
+      <a class="nav-link" href="{% url 'usuario:usuario_informe' %}">
           <i class="fas fa-file-invoice"></i>
                  
         <span>Informes</span></a>

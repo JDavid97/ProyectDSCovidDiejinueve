@@ -40,10 +40,12 @@ class UsuarioForm(ModelForm):
                     'placeholder': 'Password',
                 }
             ),     
-            'groups': SelectMultiple(attrs={
-                'class': 'form-control select2',
-                'style': 'width: 100%',
+            'groups': SelectMultiple(attrs={                   
+                'class': 'form-control',
+                'id': 'select2',
+                'style': 'width: 100%'                 
             })  
+            
         }
         exclude = ['user_permissions', 'last_login', 'date_joined', 'is_staff', 'is_active', 'is_superuser']
         

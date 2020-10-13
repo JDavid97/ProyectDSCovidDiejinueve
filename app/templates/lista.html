@@ -36,11 +36,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer">
-            <a href="{{ url_crear }}" class="btn btn-primary btn-flat btnTest">
-                <i class="fas fa-plus"></i> Nuevo registro
-            </a>
-        </div>
+
+        {% block nuevoRegistro %}
+
+        {% endblock %}       
     </div>
 {% endblock %}
 

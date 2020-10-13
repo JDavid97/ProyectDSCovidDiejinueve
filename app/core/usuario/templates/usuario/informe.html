@@ -1,0 +1,38 @@
+{% extends 'lista.html' %}
+
+{% block columns %}
+<tr>
+    <th scope="col">Nro</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellidos</th>
+    <th scope="col">Nombre de usuario</th>
+    <th scope="col">Tipo de usuario</th>
+</tr>
+{% endblock %}
+
+{% block rows %}
+
+{% for c in object_list %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.first_name }}</td>
+    <td>{{ c.last_name }}</td>
+    <td>{{ c.username }}</td>
+
+    <td>{% for g in c.groups.all %}
+        <span class="badge badge-success">{{ g.name }}<br /></span>
+        {% endfor %}
+    </td>
+</tr>
+{% endfor %}
+<p></p>
+
+{% endblock %}
+
+{% block nuevoRegistro %}
+<div class="card-footer">
+    <a href="{% url 'usuario:usuario_lista_pdf' %}" class="nav-link btn-info btn-flat">
+        <i class="fas fa-download"></i> Descargar
+    </a>
+</div>
+{% endblock %}

@@ -10,14 +10,16 @@ from django.utils.decorators import method_decorator
 
 from core.erp.forms import PacienteForm
 from core.erp.models import Paciente, Administrador
-from core.erp.mixins import IsSuperuserMixin
+from core.erp.mixins import IsSuperuserMixin, ValidatePermissionRequiredMixin
+from core.usuario.models import Usuario
 
 
 
-class PacienteListView(LoginRequiredMixin, ListView):
+class PacienteListView(LoginRequiredMixin, ValidatePermissionRequiredMixin, ListView):
     # permisio
-    model = Paciente
+    model = Usuario
     template_name = 'paciente/lista.html'
+    permission_required = 'view_usuario'
 
     @method_decorator(csrf_exempt)
     # @method_decorator(login_required)
@@ -50,11 +52,12 @@ class PacienteListView(LoginRequiredMixin, ListView):
         return context
 
 
-class PacienteCrearView(LoginRequiredMixin, CreateView):
+class PacienteCrearView(LoginRequiredMixin, ValidatePermissionRequiredMixin, CreateView):
     model = Paciente
     form_class = PacienteForm
     template_name = 'paciente/crearP.html'
     success_url = reverse_lazy('erp:paciente_listar')
+    permission_required = 'add_usuario'
 
 
     #--- AJAX -----
@@ -103,12 +106,13 @@ class PacienteCrearView(LoginRequiredMixin, CreateView):
         return context
 
 
-class PacienteUpdateView(UpdateView):
+class PacienteUpdateView(LoginRequiredMixin, ValidatePermissionRequiredMixin, UpdateView):
     
     model = Paciente
     form_class = PacienteForm
     template_name = 'paciente/crearP.html'
     success_url = reverse_lazy('erp:paciente_listar')
+    permission_required = 'change_usuario'
 
     # def dispatch(self, request, *args, **kwargs):
     #     self.object = self.get_object()
@@ -138,11 +142,12 @@ class PacienteUpdateView(UpdateView):
         #context['object_list'] = Administrador.objects.all()
         return context
 
-class PacienteDeleteView(DeleteView):
+class PacienteDeleteView(LoginRequiredMixin, ValidatePermissionRequiredMixin, DeleteView):
 
     model = Paciente
     template_name = 'paciente/borrarP.html'
     success_url = reverse_lazy('erp:paciente_listar')
+    permission_required = 'delete_usuario'
 
     # AJAX
     # @method_decorator(csrf_exempt)
