@@ -2,92 +2,97 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary1 sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'erp:dashboard' %}">
-      <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-head-side-mask"></i>
-        
-      </div>
-      <div class="sidebar-brand-text mx-3">Covid Diejinueve <sup>19</sup></div>
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'erp:dashboard' %}">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-head-side-mask"></i>
+
+    </div>
+    <div class="sidebar-brand-text mx-3">Covid Diejinueve <sup>19</sup></div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" href="{% url 'erp:dashboard' %}">
+      <i class="fas fa-home"></i>
+      <span>Inicio</span></a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    GESTIONAR USUARIOS
+  </div>
+
+  <!-- Nav Item - Modulo usuario -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+      aria-controls="collapseTwo">
+      <i class="fas fa-users"></i>
+      <span>Tipo de usuario</span>
     </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Modulo usuario:</h6>
+        <a href="{% url 'erp:paciente_listar' %}" class="collapse-item" href="buttons.html">Paciente</a>
+        <a href="{% url 'erp:doctor_listar' %}" class="collapse-item" href="cards.html">Doctor</a>
+        {% for g in request.user.groups.all %}
+        {% if g.name == "doctor" or g.name == "Administrador" %}
+        <a href="{% url 'usuario:usuario_listar' %}" class="collapse-item" href="cards.html">Usuarios</a>
+        {% endif %}
+        {% endfor %}
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-      <a class="nav-link" href="{% url 'erp:dashboard' %}">
-          <i class="fas fa-home"></i>
-        <span>Inicio</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      GESTIONAR USUARIOS
-    </div>
-
-    <!-- Nav Item - Modulo usuario -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-users"></i>
-        <span>Tipo de usuario</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Modulo usuario:</h6>
-          <a href="{% url 'erp:paciente_listar' %}" class="collapse-item" href="buttons.html">Paciente</a>
-          <a href="{% url 'erp:doctor_listar' %}" class="collapse-item" href="cards.html">Doctor</a>
-          {% for g in request.user.groups.all %}
-          {% if g.name == "doctor" or g.name == "Administrador" %}  
-          <a href="{% url 'usuario:usuario_listar' %}" class="collapse-item" href="cards.html">Usuarios</a>
-          {% endif %}
-          {% endfor %}          
-          
-        </div>
       </div>
-    </li>
-   
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      OTROS
     </div>
+  </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'erp:dashboard' %}">
-          <i class="fas fa-street-view"></i>
-        <span>Localización</span></a>
-    </li>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'chat:chat_view' %}">
-          
-          <i class="fas fa-comments"></i>
-        <span>Chat</span></a>
-    </li>
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    OTROS
+  </div>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'usuario:usuario_informe' %}">
-          <i class="fas fa-file-invoice"></i>
-                 
-        <span>Informes</span></a>
-    </li>
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'erp:dashboard' %}">
+      <i class="fas fa-street-view"></i>
+      <span>Localización</span></a>
+  </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+  <!-- Nav Item - Charts -->
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'chat:chat_view' %}">
 
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+      <i class="fas fa-comments"></i>
+      <span>Chat</span></a>
+  </li>
 
-  </ul>
-  <!-- End of Sidebar -->
+  {% for g in request.user.groups.all %}
+  {% if g.name == "doctor" or g.name == "Administrador" %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'usuario:usuario_informe' %}">
+      <i class="fas fa-file-invoice"></i>
+
+      <span>Informes</span></a>
+  </li>
+  {% endif %}
+  {% endfor %}
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->

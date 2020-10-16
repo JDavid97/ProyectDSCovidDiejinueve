@@ -5,24 +5,18 @@
 
   <ul class="navbar-nav ml-auto">
     {% for g in request.user.groups.all %}
-    <a type="button" class="btn btn-outline-secondary" href="{% url 'usuario:usuario_grupo' g.id %}">
-      <span class="mr-2 d-none d-lg-inline small">
-        {{ g.name }}
-      </span>
-    </a>
+    <a type="button" class="btn2 btn-outline-secondary" href="/usuario/tipo/grupo/1/">
+      {{ g.name }}
+   </a>
     {% endfor %}
-
+    <a type="button" class="btn1 btn-outline-secondary" href="#" data-toggle="modal" data-target="#logoutModal">
+      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-600"></i>
+      Salir
+  </a>
     <!-- <i class="fas fa-userg-cog"></i>  -->
 
 
   </ul>
-  <div class="dropdown-divider"></div>
-  <a type="button" class="btn1 btn-outline-secondary" href="#" data-toggle="modal" data-target="#logoutModal">
-    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-600"></i>
-    Salir
-  </a>
-
-
 </nav>
 
 

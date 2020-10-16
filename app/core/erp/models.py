@@ -4,9 +4,11 @@ from datetime import datetime
 
 from django.forms import model_to_dict
 from core.models import BaseModel
+
 from crum import get_current_request, get_current_user
+# from core.usuario.models import Usuario
 
-
+          
 class Administrador(models.Model):
     nombres = models.CharField(max_length=150, verbose_name='Nombres')
     apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
