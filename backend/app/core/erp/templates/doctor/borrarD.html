@@ -1,0 +1,9 @@
+{% extends 'borrar.html' %}
+{% block botton %}
+<a href="{{ cancelarcreardoctor }}" class="btn btn-info btn-flat">
+    <i class="fas fa-window-close"></i> Cancelar
+</a>  
+{% endblock %}
+{% block nombre %}  
+¿Estas seguro de eliminar el doctor: {{ object.nombres }}
+{% endblock %}
