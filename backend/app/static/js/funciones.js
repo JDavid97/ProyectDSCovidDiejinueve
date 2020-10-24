@@ -3,7 +3,7 @@ function mensaje_error(obj) {
     if (typeof (obj) === 'object') {
         html = '<ul style="text-align: left;">';
         $.each(obj, function (key, value) {
-            // html += '<li>' + key + ': ' + value + '</li>';
+            html += '<li>' + key + ': ' + value + '</li>';
         });
         html += '</ul>';
     }

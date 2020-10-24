@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cvd/', include('core.erp.urls')),
     path('usuario/', include('core.usuario.urls')),
+    path('chat/', include('core.chat.urls')),
     path('usuario/registro/', UsuarioCrearView.as_view(), name = 'usuario_crear')
 ]

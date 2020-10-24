@@ -8,9 +8,10 @@ from django.utils.decorators import method_decorator
 
 from core.erp.forms import DoctorForm
 from core.erp.models import Doctor
+from core.usuario.models import Usuario
 
 class DoctorListView(ListView):
-    model = Doctor
+    model = Usuario
     template_name = 'doctor/listaD.html'
 
     @method_decorator(login_required)

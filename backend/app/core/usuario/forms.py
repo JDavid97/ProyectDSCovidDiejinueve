@@ -8,7 +8,7 @@ class UsuarioForm(ModelForm):
 
     class Meta:
         model = Usuario
-        fields = 'first_name', 'last_name', 'email', 'username', 'password', 'groups'
+        fields = 'first_name', 'last_name', 'username', 'password', 'nmro_unco_idntfccn_tpo_idntfccn', 'nmro_idntfccn', 'tlfno', 'nmro_unco_idntfccn_gnro', 'email', 'groups',
         widgets = {
             'first_name': TextInput(
                 attrs={
@@ -40,10 +40,46 @@ class UsuarioForm(ModelForm):
                     'placeholder': 'Password',
                 }
             ),     
-            'groups': SelectMultiple(attrs={
-                'class': 'form-control select2',
-                'style': 'width: 100%',
+            'nmro_idntfccn': PasswordInput(render_value=True,
+                attrs={                    
+                    'class': 'form-control',
+                    'placeholder': 'Nro Identificación',
+                }
+            ),     
+            'nmro_unco_idntfccn_tpo_idntfccn': Select(
+                attrs={                    
+                    'class': 'form-control',                    
+                }
+            ),     
+            'tlfno': TextInput(
+                attrs={                    
+                    'class': 'form-control',    
+                    'placeholder': 'Telefono',                
+                }
+            ),     
+            'nmro_unco_idntfccn_gnro': Select(
+                attrs={                    
+                    'class': 'form-control',                  
+                }
+            ),     
+            'lngtd': TextInput(
+                attrs={                    
+                    'class': 'form-control',      
+                    'placeholder': 'Longitud',             
+                }
+            ),     
+            'lttd': TextInput(
+                attrs={                    
+                    'class': 'form-control',  
+                    'placeholder': 'Latitud',                 
+                }
+            ),     
+            'groups': SelectMultiple(attrs={                   
+                'class': 'form-control',
+                'id': 'select2',
+                'style': 'width: 100%'                 
             })  
+            
         }
         exclude = ['user_permissions', 'last_login', 'date_joined', 'is_staff', 'is_active', 'is_superuser']
         
