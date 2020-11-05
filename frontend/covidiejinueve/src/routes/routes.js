@@ -4,11 +4,12 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const routerOptions = [
-  { path: '/', name: 'Login'},
-  { path: '/register', name: 'Register'},
+  { path: '/', name: 'Login', meta:{ requiresVisitor : true} },
+  { path: '/register', name: 'Register', meta:{ requiresVisitor : true}},
   { 
     path: '/cvd', 
     name: 'DashboardLayout',
+    meta:{ userLoged : true },
     children: [
       {
         path: "map",
