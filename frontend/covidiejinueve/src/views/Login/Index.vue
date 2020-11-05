@@ -23,7 +23,7 @@
                         ></b-form-input>
                     </b-form-group>
 
-                    <b-alert v-model="loginFail" variant="danger" dismissible>
+                    <b-alert v-model="failLogin" variant="danger" dismissible>
                         Usuario o contraseña incorrecta
                     </b-alert>
 
@@ -46,15 +46,14 @@ export default {
             failLogin:false
         }
     },
-    computed:{
-        loginFail(){
-            return this.$store.state.oauth.loginFail
-        }
-    },
     methods:{
         trylogin: function(){
             console.log('Darle submit')
             this.$store.dispatch('oauth/login', this.form)
+            .then( data => data)
+            .catch( () =>{
+                this.failLogin = true;
+            })
         }
     }
 }
