@@ -4,7 +4,7 @@ const oauthApi = {
     login: function(user){
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if(user.name == "Camilo47" & user.password == "2020GaMatt1999"){
+                if(user.username == "Camilo47" & user.password == "2020GaMatt1999"){
                     resolve(
                         {
                           logued:true,
