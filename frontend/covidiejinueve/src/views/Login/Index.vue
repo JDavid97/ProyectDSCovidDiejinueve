@@ -50,9 +50,10 @@ export default {
     },
     methods:{
         trylogin: function(){
-            console.log('Darle submit')
             this.$store.dispatch('oauth/login', this.form)
-            .then( data => data)
+            .then( () => {
+                this.$router.push('cvd/map');
+            })
             .catch( () =>{
                 this.failLogin = true;
             })
