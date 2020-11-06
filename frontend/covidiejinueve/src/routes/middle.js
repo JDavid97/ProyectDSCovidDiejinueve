@@ -14,7 +14,7 @@ const router = new VueRouter({
         requiresVisitor = to.matched.some(record =>record.meta.requiresVisitor)
 
     if(requiresAuth){
-        if(!store.state.oauth.user){
+        if(!store.state.oauth.token){
             next({
                 name: 'Login'
             });
@@ -22,7 +22,7 @@ const router = new VueRouter({
             next();
         }
     }else if(requiresVisitor){
-        if(store.state.oauth.user){
+        if(store.state.oauth.token){
             next('/cvd/map');
         }else{
             next();

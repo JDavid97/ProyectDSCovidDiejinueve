@@ -12,7 +12,8 @@ const oauthApi = {
                               name:'Camilo',
                               lastname:'Arias',
                               rol: 'admin'
-                          }
+                          },
+                          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }
                     )
                 }

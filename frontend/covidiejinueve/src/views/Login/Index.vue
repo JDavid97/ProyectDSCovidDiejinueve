@@ -29,6 +29,8 @@
 
                     <b-button pill variant="primary" type="submit">Iniciar sesión</b-button>
                 </b-form>
+
+                <b-link to="/register">Registrarse</b-link>
             </b-col>
         </b-row>
     </b-container>
