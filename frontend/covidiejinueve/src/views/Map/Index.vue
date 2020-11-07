@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Map</h1>
         <div id="map"></div>
     </div>
 </template>
@@ -58,16 +57,46 @@ export default {
     },
     mounted() {
     var _this = this;
+
+    function checkGeoLocation() {
+        return new Promise((resolve, reject) =>
+            navigator.permissions ?
+
+            // Permission API is implemented
+            navigator.permissions.query({
+                name: 'geolocation'
+            }).then(permission =>
+                // is geolocation granted?
+                permission.state === "granted"
+                ? resolve()
+                : reject(new Error("No concedo permiso"))
+            ) 
+            
+            :
+
+            // Permission API was not implemented
+            reject(new Error("Permission API is not supported"))
+        )
+    }
+
+
     function loadGM(){
       _this.$store.state.maps.loader.load().then( google => {
-          navigator.geolocation.getCurrentPosition(position => {
-              var startLocation = {
-                  lat: position.coords.latitude, 
-                  long: position.coords.longitude
-              } 
-              _this.$store.commit('maps/SET_CENTERMAP',new google.maps.LatLng(startLocation.lat, startLocation.long) )
-              _this.initMap(google);
-          })
+          var startLocation = {lat:3.428605, long:-76.535683} //default position
+          checkGeoLocation()
+            .then( () => {
+                navigator.geolocation.getCurrentPosition(position => {
+                    startLocation.lat = position.coords.latitude
+                    startLocation.long = position.coords.longitude
+                    _this.$store.commit('maps/SET_CENTERMAP',new google.maps.LatLng(startLocation.lat, startLocation.long) )
+                    _this.initMap(google);
+                })
+            })
+            .catch( err => {
+                console.log(err)
+                _this.$store.commit('maps/SET_CENTERMAP',new google.maps.LatLng(startLocation.lat, startLocation.long) )
+                _this.initMap(google);
+            })
       });
     }
 
@@ -75,7 +104,7 @@ export default {
     if(this.$store.state.pacientes.pacientes.length == 0 ){
       this.$store.dispatch('pacientes/getPacientes')
         .then(data => { 
-            //console.log(data)
+            console.log(data)
             loadGM() 
         })
     }
