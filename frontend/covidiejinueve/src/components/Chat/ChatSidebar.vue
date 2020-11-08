@@ -7,15 +7,12 @@
       </div>
 
       <div v-show="toogleChat">
-        <b-card >
-          <b-badge pill variant="info">Hola Pedro</b-badge>
-          <b-badge pill variant="success">Que tal doc?</b-badge>
-        </b-card>
+        <MessageBox></MessageBox>
       </div>
 
       <template #footer>
         <div v-show="toogleChat">
-          <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
+          <div class="d-flex bg-light text-light align-items-center px-3 py-2">
             <b-form>
               <b-container>
                 <b-row>
@@ -23,7 +20,7 @@
                     <b-form-input ></b-form-input>
                   </b-col>
                   <b-col cols="4" class="chat-form-submit">
-                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="submit" variant="primary">Enviar</b-button>
                   </b-col>
                 </b-row>
               </b-container>
@@ -36,9 +33,12 @@
 
 <script>
 import Contact from './Contacts.vue'
+import MessageBox from './MessageBox.vue'
+
 export default {
   components:{
-    Contact
+    Contact,
+    MessageBox
   },
   data(){
     return{

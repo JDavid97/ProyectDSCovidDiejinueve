@@ -35,7 +35,7 @@
 }
 
 #main-chat-sidebar{
-    top:25%;
+    top:18%;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     width: 100% !important;
@@ -47,6 +47,35 @@
 
     .b-sidebar-body .card{
         height: 67vh;
+        .card-body{
+            .fixed-top{
+                padding: 3px 5px;
+                background-color: white;
+                top: 2.9em;
+                width: 100%;
+                font-size: 1.1em;
+            }
+
+            .msg-container{
+                width: 100%;
+
+                &.success{
+                    text-align: right;
+                }
+                
+                .badge{
+                    font-size: 92%;
+                    font-weight: 400;
+                    .badge-info{
+                         left:0px;
+                    }
+                    .badge-success{
+                         right: 0px;
+                    }
+                }
+            }
+        } 
+
     }
 
     footer form .container{
@@ -65,9 +94,14 @@
     
     @media (min-width: 768px) {
         width: 320px !important;
+        top:25%;
 
         &.b-sidebar-right{
             right: 66px;
+        }
+
+        .b-sidebar-body .card .card-body .fixed-top{
+                width: 94%;
         }
     }
 }   
