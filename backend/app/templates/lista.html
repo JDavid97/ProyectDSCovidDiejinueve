@@ -1,0 +1,89 @@
+{% extends 'body.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/datatables/datatables.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/DataTables-1.10.22/css/dataTables.bootstrap4.min.css' %}"/>
+    
+    <script type="text/javascript" src="{% static 'lib/dataTables/datatables.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/DataTables/datatables.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/DataTables/DataTables-1.10.22/css/dataTables.bootstrap4.min.css' %}" />
+
+    {% block head_list %}
+
+    {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="card2 card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-search"></i>
+                {{ title }}
+            </h3>
+        </div>
+        <div class="card-body">
+            <table class="table" id="data">
+                <thead>
+                    {% block columns %}
+
+                    {% endblock %}
+                </thead>
+                <tbody>
+                    {% block rows %}
+
+                    {% endblock %}
+                </tbody>
+            </table>
+        </div>
+
+        {% block nuevoRegistro %}
+
+        {% endblock %}       
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="application/javascript">
+    $(document).ready(function() {
+        $('#data').DataTable({
+        "destroy": true,
+        "language": {
+            "lengthMenu":     "Mostrar _MENU_ registros",
+            "zeroRecords":    "No se encontraron resultados",
+            "emptyTable":     "Ningún dato disponible en esta tabla =(",
+            "info":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "infoPostFix":    "",
+            "sSearch":         "Buscar:",                        
+            "loadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                 "sPrevious": "Anterior"
+            },
+            "sProcessing": "Procesando..."
+            }           
+        });
+
+        // $.fn.DataTable.ext.errMode = 'throw';
+
+        $('.btnTest').on('click', function () {
+            $.ajax({
+                url: '{% url 'erp:paciente_listar' %}',
+                type: 'POST',
+                data: '',
+                dataType: 'json'
+            }).done(function (data) {
+                // console.log(data)
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus+': '+errorThrown);
+            }).always(function (data) {
+
+            })
+        });
+    });
+    </script>
+{% endblock %}

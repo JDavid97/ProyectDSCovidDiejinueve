@@ -1,0 +1,50 @@
+{% extends 'lista.html' %}
+
+{% block columns %}
+<tr>
+    <th scope="col">Nro</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellidos</th>
+    <th scope="col">Nombre de usuario</th>
+    <th scope="col">Tipo de usuario</th>
+    {% for g in request.user.groups.all %}
+    {% if g.name == "doctor" or g.name == "Administrador" %}
+    <th scope="col">Opción</th>
+    {% endif %}
+    {% endfor %}
+</tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+{% for g in c.groups.all %}
+{% if g.name == "doctor" %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.first_name }}</td>
+    <td>{{ c.last_name }}</td>
+    <td>{{ c.username }}</td>
+
+    <!-- {{ group }} -->
+    <td>{% for g in c.groups.all %}
+        <span class="badge badge-info">{{ g.name }}<br /></span>
+        {% endfor %}
+    </td>
+    {% for g in request.user.groups.all %}
+    {% if g.name == "doctor" or g.name == "Administrador" %}
+    <td>
+        <a href="{% url 'usuario:usuario_editar' c.id %}" class="btn btn-primary btn-xs btn-flat">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="{% url 'usuario:usuario_eliminar' c.id %}" class="btn btn-danger btn-xs btn-flat">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </td>
+    {% endif %}
+    {% endfor %}
+</tr>
+{% endif %}
+{% endfor %}
+{% endfor %}
+<p></p>
+{% endblock %}
