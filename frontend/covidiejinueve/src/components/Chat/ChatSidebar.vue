@@ -1,19 +1,19 @@
 <template>
-  <b-sidebar id="main-chat-sidebar" :title="nameUserChat" right shadow width="320px" no-slide>
+  <b-sidebar id="main-chat-sidebar" :title="msgTo.nameUserChat" right shadow width="320px" no-slide>
       <div v-show="toogleContacts">
         <b-list-group>
-          <Contact v-for="n in 10" v-bind:key="n" @click="toogle"></Contact>
+          <Contact v-for="contact in contacts" v-bind:key="contact.id" @click="toogle" :contacto="contact"></Contact>
         </b-list-group>
       </div>
 
       <div v-show="toogleChat">
-        <MessageBox></MessageBox>
+        <MessageBox @click="toogle" :chat="chat"></MessageBox>
       </div>
 
       <template #footer>
         <div v-show="toogleChat">
           <div class="d-flex bg-light text-light align-items-center px-3 py-2">
-            <b-form>
+            <b-form v-on:submit.prevent="sendText">
               <b-container>
                 <b-row>
                   <b-col cols="8" class="chat-form-input">
@@ -43,8 +43,13 @@ export default {
   data(){
     return{
       toogleContacts : true,
-      nameUserChat : 'Chat',
-      roleUserChat: ''
+      msgTo:{
+        nameUserChat:'Chat',
+        userId:0
+      },
+      roleUserChat: '',
+      contacts: [],
+      chat:[]
     }
   },
   computed:{
@@ -54,9 +59,36 @@ export default {
   },
   methods:{
     toogle: function(user){
-      this.nameUserChat = user.name
+      this.msgTo.nameUserChat = user.name
+      this.msgTo.userId = user.id
       this.roleUserChat = user.role
+      if(user.id != 0){
+        this.getMessages(user.id)
+      }
       this.toogleContacts = !this.toogleContacts
+    },
+    getMessages: function(chatWithUserId){
+      this.$store.dispatch('chat/getChat', {from:this.$store.state.oauth.userId, to:chatWithUserId})
+                .then( data => {
+                     this.chat = data
+                })
+    },
+    sendText: function(){
+      alert('enviar mensaje')
+    }
+  },
+  created(){
+    //verificar que tipo de usuario es para cargar susu contactos
+    //ahora funciona como si fuera un paciente
+    //if(this.$store.state.oauth.user.role == "admin"){}
+    if(this.$store.state.doctores.doctores.length == 0 ){
+      this.$store.dispatch('doctores/getDoctores')
+        .then( data => {
+          this.contacts = data
+        })
+    }
+    else{
+      this.contacts = this.$store.state.doctores.doctores
     }
   }
 }

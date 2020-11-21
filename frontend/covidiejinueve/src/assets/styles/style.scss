@@ -56,21 +56,49 @@
                 font-size: 1.1em;
             }
 
-            .msg-container{
-                width: 100%;
+            .messages-container{
+                display: flex;
+                flex-flow: column nowrap;
 
-                &.success{
-                    text-align: right;
-                }
-                
-                .badge{
-                    font-size: 92%;
-                    font-weight: 400;
-                    .badge-info{
-                         left:0px;
+                .msg-container{
+                    width: auto;
+    
+                    &.success{
+                        text-align: right;
+                        align-self: flex-end;
                     }
-                    .badge-success{
-                         right: 0px;
+
+                    &.info{
+                        align-self: flex-start;
+                    }
+                    
+                    .badge{
+                        font-size: 92%;
+                        font-weight: 400;
+                        .badge-info{
+                             left:0px;
+                        }
+                        .badge-success{
+                             right: 0px;
+                        }
+                    }
+    
+                    .p-message{
+                        border-bottom-left-radius: 15px;
+                        border-top-left-radius: 15px;
+                        border-bottom-right-radius: 15px;
+                        border-top-right-radius: 15px;
+                        width: fit-content;
+                        max-width: 200px;
+                        color: white;
+    
+                        &.success{
+                            background-color: #007bff;
+                        }
+    
+                        &.info{
+                            background-color: #5caf17;
+                        }
                     }
                 }
             }
