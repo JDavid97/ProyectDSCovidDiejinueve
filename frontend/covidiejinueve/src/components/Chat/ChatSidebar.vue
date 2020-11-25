@@ -17,7 +17,7 @@
               <b-container>
                 <b-row>
                   <b-col cols="8" class="chat-form-input">
-                    <b-form-input ></b-form-input>
+                    <b-form-input v-model="newMsg"></b-form-input>
                   </b-col>
                   <b-col cols="4" class="chat-form-submit">
                     <b-button type="submit" variant="primary">Enviar</b-button>
@@ -49,7 +49,8 @@ export default {
       },
       roleUserChat: '',
       contacts: [],
-      chat:[]
+      chat:[],
+      newMsg : ""
     }
   },
   computed:{
@@ -74,7 +75,15 @@ export default {
                 })
     },
     sendText: function(){
-      alert('enviar mensaje')
+      this.$store.commit('chat/SEND_MSG',{
+        message:{
+          from:this.$store.state.oauth.userId,
+          to: this.chat[0].to,
+          message: this.newMsg
+        },
+        position: this.chat.position
+        })
+        this.newMsg = ""
     }
   },
   created(){

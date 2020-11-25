@@ -30,20 +30,11 @@ export default {
             this.$emit("click", {id:0,name:'Chat',role:''});
         }
     },
-   /* mounted(){
-        var _this = this 
- 
-        if(this.$store.state.chat.chats.length == 0 ){
-            console.log("Pedir datos",this.$store.state.oauth.userId,this.msgTo)
-            this.$store.dispatch('chat/getChat', {from:this.$store.state.oauth.userId, to:this.msgTo})
-                .then( data => {
-                     let allChats = _this.chats 
-                     this.chats = allChats.push(data)
-                })
-        }
-        else{
-            console.log("buscar en los chats, si no hacer una peticion")
-        }
-    } */
+    //Mover hasta abajo el chat cuando entre un mensaje
+    updated(){
+        var messageBox = document.getElementById('main-chat-sidebar')
+        var bodyMessages = messageBox.getElementsByClassName('b-sidebar-body');
+        bodyMessages[0].scrollTo(0, 1000);
+    } 
 }
 </script>
