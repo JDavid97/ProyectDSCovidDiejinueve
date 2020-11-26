@@ -16,10 +16,10 @@ const pacientesApi = {
                        },
                        {
                            id : "003",
-                           name: "Marta",
+                           name: "Luisa",
                            lastname : "Caramelo",
                            role : "Paciente",
-                           picture: "https://cdn.bioguia.com/embed/1bfc9cc8a23ce4d1f518abf591da97341529442379/0_mujernovaalbao.JPG",
+                           picture: "https://static.mujerhoy.com/noticias/201706/14/media/cortadas/por-que-algunas-mujeres-tardan-en-llegar-al-orgasmo-kiLE-U301072963448EjF-560x420@MujerHoy.jpg",
                            location:{
                                lat:3.420808,
                                lng:-76.525854

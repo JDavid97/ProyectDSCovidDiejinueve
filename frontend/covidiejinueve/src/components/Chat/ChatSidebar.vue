@@ -87,18 +87,34 @@ export default {
     }
   },
   created(){
-    //verificar que tipo de usuario es para cargar susu contactos
-    //ahora funciona como si fuera un paciente
-    //if(this.$store.state.oauth.user.role == "admin"){}
-    if(this.$store.state.doctores.doctores.length == 0 ){
-      this.$store.dispatch('doctores/getDoctores')
-        .then( data => {
-          this.contacts = data
-        })
+    //var _this = this
+    
+    var getContacts = { 
+      paciente : 'doctores/getDoctores',
+      doctor : 'pacientes/getPacientes'
     }
-    else{
-      this.contacts = this.$store.state.doctores.doctores
+
+    var getContactsByType = (call) => {
+       this.$store.dispatch(call)
+         .then( data => {
+           console.log('LLamando a los contactos...'+call)
+           let contactos = this.contacts
+           console.log(contactos)
+           contactos.push(...data)
+           console.log(contactos)
+
+           this.contacts = contactos
+         })
     }
+
+    var callMethod = getContacts.paciente
+
+    if(this.$store.state.oauth.userRole == "doctor") callMethod = getContacts.doctor
+
+    getContactsByType(callMethod)
+  
+    if(this.$store.state.oauth.userRole == "admin") getContactsByType(getContacts.doctor)
+   
   }
 }
 </script>
