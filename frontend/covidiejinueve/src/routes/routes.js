@@ -13,7 +13,8 @@ const routerOptions = [
     children: [
       {
         path: "map",
-        name: "Map"
+        name: "Map",
+        meta:{ all : true },
       },
       {
         path: "dashboard",
@@ -30,7 +31,7 @@ const routerOptions = [
         name: "Paciente",
         meta:{ 
           doctor : true,
-          
+          admin : true
         },
       },
       {

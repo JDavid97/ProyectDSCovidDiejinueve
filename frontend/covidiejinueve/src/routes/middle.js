@@ -9,13 +9,18 @@ const router = new VueRouter({
     linkExactActiveClass: "nav-item active"
   });
 
-  function accessRoles(admin, doctor){
-    console.log(admin, doctor)
-  }
+  var accessRoles = (admin, doctor) => {
+    return new Promise( (resolve, reject) => {
+        let userRole = store.state.oauth.userRole
+        if(admin && userRole == "admin" || doctor &&  userRole == "doctor") resolve()
+        reject()
+    })
+  } 
 
   router.beforeEach((to, from, next) => {
     let requiresAuth = to.matched.some(record => record.meta.userLoged),
         requiresVisitor = to.matched.some(record =>record.meta.requiresVisitor),
+        allUsersCanAccess = to.matched.some(record =>record.meta.all),
         requiresBeAdmin = to.matched.some(record =>record.meta.admin),
         requiresBeDoctor = to.matched.some(record =>record.meta.doctor)
 
@@ -24,9 +29,20 @@ const router = new VueRouter({
             next({
                 name: 'Login'
             });
-        }else{
-            accessRoles(requiresBeAdmin, requiresBeDoctor)
-            next();
+        }
+        else{
+            //Restringir rutas dependiendo del rol
+            if(allUsersCanAccess){
+                next()
+            }
+            else{
+                accessRoles(requiresBeAdmin, requiresBeDoctor).then(()=>{
+                    next()
+                })
+                .catch( ()=>{
+                    next('/cvd/map');
+                })
+            }
         }
     }else if(requiresVisitor){
         if(store.state.oauth.token){
