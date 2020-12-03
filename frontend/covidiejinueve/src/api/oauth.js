@@ -12,7 +12,8 @@ const oauthApi = {
                               id:'001',
                               name:'Camilo',
                               lastname:'Arias',
-                              role: 'admin'
+                              role: 'admin',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }
@@ -26,7 +27,8 @@ const oauthApi = {
                               id:'002',
                               name:'Andres',
                               lastname:'Arias',
-                              role: 'paciente'
+                              role: 'paciente',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }
@@ -40,7 +42,8 @@ const oauthApi = {
                               id:'003',
                               name:'Andres',
                               lastname:'Arias',
-                              role: 'doctor'
+                              role: 'doctor',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }

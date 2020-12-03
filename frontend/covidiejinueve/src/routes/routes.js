@@ -17,19 +17,26 @@ const routerOptions = [
       },
       {
         path: "dashboard",
-        name: "Dashboard"
+        name: "Dashboard",
+        meta:{ admin : true },
       },
       {
         path: "doctor",
-        name: "Doctor"
+        name: "Doctor",
+        meta:{ admin : true },
       },
       {
         path: "paciente",
-        name: "Paciente"
+        name: "Paciente",
+        meta:{ 
+          doctor : true,
+          
+        },
       },
       {
         path: "admin",
-        name: "Admin"
+        name: "Admin",
+        meta:{ admin : true },
       }
     ]  
   },

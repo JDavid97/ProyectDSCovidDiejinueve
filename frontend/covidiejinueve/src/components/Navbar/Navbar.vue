@@ -7,8 +7,20 @@
                 
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
-                <b-nav-item href="#">Usuario</b-nav-item>
+                <b-nav-item href="#">
+                    <b-img :src="profilePicture" rounded="circle" alt="profile picture" class="navbar-profile-picture"></b-img>
+                </b-nav-item>
             </b-navbar-nav>
         </b-navbar>
     </div>
 </template>
+
+<script>
+export default {
+    computed:{
+        profilePicture(){
+            return this.$store.state.oauth.userPicture
+        }
+    }
+}
+</script>

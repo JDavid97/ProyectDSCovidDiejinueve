@@ -8,6 +8,7 @@ export default {
     userName : localStorage.getItem('userName') ? localStorage.getItem('userName') : null ,
     userLastName : localStorage.getItem('userLastName') ? localStorage.getItem('userLastName') : null ,
     userRole : localStorage.getItem('userRole') ? localStorage.getItem('userRole') : null ,
+    userPicture : localStorage.getItem('userPicture') ? localStorage.getItem('userPicture') : null
   },
   mutations: {
     SET_USERID (state, payload) {
@@ -24,6 +25,9 @@ export default {
     },
     SET_USERROLE (state, payload) {
       state.userRole = payload
+    },
+    SET_USERPICTURE (state, payload) {
+      state.userPicture = payload
     }
   },
   actions: {
@@ -35,12 +39,13 @@ export default {
                 localStorage.setItem('userName', data.user.name)
                 localStorage.setItem('userLastName', data.user.lastname)
                 localStorage.setItem('userRole', data.user.role)
+                localStorage.setItem('userPicture', data.user.picture)
                 commit('SET_USERID', data.user.id)
                 commit('SET_TOKEN', data.token)
                 commit('SET_USERNAME', data.user.name)
                 commit('SET_USERLASTNAME', data.user.lastname)
                 commit('SET_USERROLE', data.user.role)
-
+                commit('SET_USERPICTURE', data.user.picture)
             })
     }
   }
