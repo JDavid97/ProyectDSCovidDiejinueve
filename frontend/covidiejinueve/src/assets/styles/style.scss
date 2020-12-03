@@ -1,10 +1,30 @@
 .navbar{
-    .navbar-profile-picture{
-        right: 2em;
-        top: 1em;
-        width: 60px;
-        height: 60px;
+    .dropup, .dropright, .dropdown, .dropleft {
         position: absolute;
+        right: 0em;
+        top: -1em;
+
+        .dropdown-toggle{
+            &::after{
+                display: none;
+            }
+
+            .navbar-profile-picture{
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .dropdown-menu {
+            top: 69%;
+            z-index: -2;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .dropup, .dropright, .dropdown, .dropleft {
+            right: 2em;
+        }
     }
 }
 

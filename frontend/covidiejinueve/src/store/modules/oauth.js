@@ -1,4 +1,5 @@
 import oauthApi from '@/api/oauth'
+import router from '@/routes/middle'
 
 export default {
   namespaced: true,
@@ -47,6 +48,11 @@ export default {
                 commit('SET_USERROLE', data.user.role)
                 commit('SET_USERPICTURE', data.user.picture)
             })
+    },
+    logout( {commit}){
+      commit('SET_TOKEN', '')
+      localStorage.setItem('token', '')
+      router.push('/')
     }
   }
 }
