@@ -1,3 +1,4 @@
+//import axios from 'axios
 const doctoresApi = {
     getDoctores(){
         return new Promise( (resolve)  => {
@@ -34,6 +35,53 @@ const doctoresApi = {
                 ])
             },800)
         })
+    },
+    update: function(userInfo){
+        
+        //let URL = 'http://Idontknow';
+        let data = new FormData();
+
+        data.append('id', userInfo.id);
+        data.append('name', userInfo.name);
+        data.append('lastname', userInfo.lastname);
+        data.append('picture', userInfo.foto ); 
+
+       /* let config = {
+          header : {
+            'Content-Type' : 'image/png'
+          }
+        } */
+
+        
+        //let status = await axios.put( URL, data, config)
+        userInfo.picture =  'https://cdn.sanity.io/images/0vv8moc6/hcplive/0ebb6a8f0c2850697532805d09d4ff10e838a74b-200x200.jpg?auto=format'
+        return userInfo //status
+        
+    },
+    delete : function(id){
+        //hacer peticion axios
+        console.log('Eliminar id: '+id)
+        return true
+    },
+    save : function(userInfo){
+        //let URL = 'http://Idontknow';
+        let data = new FormData();
+
+        data.append('name', userInfo.name);
+        data.append('lastname', userInfo.lastname);
+        data.append('picture', userInfo.foto ); 
+        data.append('password', userInfo.password ); 
+
+       /* let config = {
+          header : {
+            'Content-Type' : 'image/png'
+          }
+        } */
+        
+        //let status = await axios.put( URL, data, config)
+        userInfo.picture =  'https://staticr1.blastingcdn.com/media/photogallery/2018/5/1/660x290/b_1200x675/who-originally-said-im-not-a-doctor-but-i-play-one-on-tv-mentalflosscom_1965501.jpg'
+    
+        return userInfo //status
     }
 }
 

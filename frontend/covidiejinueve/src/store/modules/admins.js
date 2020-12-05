@@ -1,29 +1,29 @@
-import doctoresApi from '@/api/doctores'
+import adminsApi from '@/api/admin'
 
 export default {
   namespaced: true,
   state: {
-    doctores:[]
+    admins:[]
   },
   mutations: {
-    SET_DOCTORES(state,doctores){
-        state.doctores = doctores
+    SET_ADMINS(state,newAdmins){
+        state.admins = newAdmins
     }
   },
   actions : {
-    getDoctores({commit}){
-        return doctoresApi.getDoctores()
+    get({commit}){
+        return adminsApi.get()
             .then(data => {
-                commit('SET_DOCTORES',data)
+                commit('SET_ADMINS',data)
                 return data;
             })
     },
     update({commit,state},data){
-      let result = doctoresApi.update(data);
+      let result = adminsApi.update(data);
       let position
 
       if(result){
-        let user = state.doctores.find((d, index) => {
+        let user = state.admins.find((d, index) => {
           if(d.id === data.id){
             position = index
             return d
@@ -35,26 +35,26 @@ export default {
             user.picture = result.picture;
         }
 
-        let doctors = state.doctores
-        doctors[position] = user
-        commit('SET_DOCTORES', doctors) 
+        let admins = state.admins
+        admins[position] = user
+        commit('SET_ADMINS', admins) 
       }
       
       return result ? true : false
     },
     delete({commit,state},id){
-        let status = doctoresApi.delete(id)
+        let status = adminsApi.delete(id)
         if(status){
-          commit('SET_DOCTORES', state.doctores.filter( doc => doc.id != id)) 
+          commit('SET_ADMINS', state.admins.filter( admin => admin.id != id)) 
         }
         return status;
     },
     create({commit,state},data){
-      let result = doctoresApi.save(data);
+      let result = adminsApi.save(data);
       if(result){
-        let doctores = state.doctores
-        doctores.unshift(result)
-        commit('SET_DOCTORES', doctores)
+        let admins = state.admins
+        admins.unshift(result)
+        commit('SET_ADMINS', admins)
       }
       return result ? result : false
     }

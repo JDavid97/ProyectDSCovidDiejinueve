@@ -2,7 +2,7 @@
     <div class="container-table">
       <div class="overflow-auto">
 
-        <b-button variant="success">Button</b-button>
+        <b-button variant="success" v-b-modal.modal-create>Crear nuevo</b-button>
 
         <b-table
           id="my-table"
@@ -17,9 +17,14 @@
             </template>
 
             <template #cell(actions)="row">
-              <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
+              <b-button size="sm" @click="info(row.item)" class="mr-1">
                 Actualizar 
               </b-button>
+
+              <b-button danger size="sm" @click="comfirmDelete(row.item)" class="mr-1">
+                Eliminar 
+              </b-button>
+
             </template>
 
         </b-table>
@@ -33,8 +38,17 @@
 
         <p class="mt-3">Pagina actual: {{ currentPage }}</p>
 
-        <b-modal ref="modal-update" :title="'Actualizar a'+updateModal.title">
-          <p class="my-4">Hello from modal!</p>
+        <b-modal id="modal-create" ref="modal-create" :title="'Crear '+type" hide-footer>
+          <UpdateForm v-on:updateFormulario="userCreate" type="create"></UpdateForm>
+        </b-modal>
+
+        <b-modal ref="modal-update" :title="'Actualizar a '+updateModal.title" hide-footer>
+          <UpdateForm v-on:updateFormulario="userUpdate" type="update"></UpdateForm>
+        </b-modal>
+
+        <b-modal ref="modal-delete" :title="'Eliminar a '+deleteModal.title" hide-footer>
+          <h3>¿Realmente desea eliminar a {{deleteModal.title}}</h3>
+          <b-button variant="danger" @click="eliminar">Eliminar</b-button>
         </b-modal>
 
       </div>
@@ -42,8 +56,12 @@
 </template>
 
 <script>
+import UpdateForm from '../Forms/CreateUpdate.vue'
 export default {
     name : 'PacientesView',
+    components:{
+      UpdateForm
+    },
     data() {
       return {
         perPage: 3,
@@ -70,26 +88,59 @@ export default {
           { key: 'actions', label: 'Acciones' }
         ],
         updateModal: {
-          id: 'info-modal',
+          id: 0,
           title: '',
-          content: ''
+        },
+        deleteModal:{
+          id: 0,
+          title: ''
         }
       }
     },
-    props: ['items'],
+    props: ['items','closeUdateModal','closeModalDelete','type','closeModalCreate'],
     computed: {
       rows() {
         return this.items.length
       }
     },
-    methods:{
-      info(item, index, button) {
-        this.updateModal.title = item.name
-        this.updateModal.content = JSON.stringify(item, null, 2)
-         this.$refs['modal-update'].show()
-         console.log(button)
-        //this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+    watch: {
+      closeUdateModal: function (val) {
+        if(val){
+          this.$refs['modal-update'].hide()
+       }
       },
+      closeModalDelete : function(val){
+        if(val){
+            this.$refs['modal-delete'].hide()
+        }
+      },
+      closeModalCreate : function(val){
+        if(val){
+            this.$refs['modal-create'].hide()
+        }
+      }
+    },
+    methods:{
+      info(item) {
+        this.updateModal.title = item.name
+        this.updateModal.id = item.id
+        this.$refs['modal-update'].show()
+      },
+      userUpdate: function(data){
+        data.id = this.updateModal.id
+        this.$emit('update',data)
+      },
+      comfirmDelete: function(item){ 
+        this.deleteModal.title = item.name
+        this.deleteModal.id = item.id
+        this.$refs['modal-delete'].show()
+      },
+      eliminar: function(){
+        this.$emit('delete',this.deleteModal.id)
+      },
+      userCreate : function(data){
+        this.$emit('create',data)
+      }
     }
 }
 </script>

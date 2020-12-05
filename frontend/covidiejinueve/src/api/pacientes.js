@@ -1,3 +1,5 @@
+//import axios from 'axios'
+
 const pacientesApi = {
     getPacientes : function(){
         return new Promise( (resolve) => {
@@ -40,6 +42,56 @@ const pacientesApi = {
                    )
             }, 800)
         })
+    },
+    update: function(userInfo){
+        
+        //let URL = 'http://Idontknow';
+        let data = new FormData();
+
+        data.append('id', userInfo.id);
+        data.append('name', userInfo.name);
+        data.append('lastname', userInfo.lastname);
+        data.append('picture', userInfo.foto ); 
+
+       /* let config = {
+          header : {
+            'Content-Type' : 'image/png'
+          }
+        } */
+
+        
+        //let status = await axios.put( URL, data, config)
+        userInfo.picture =  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJZG-8Pk5VYr_MOP4Ks3uEeZdArTUAizNRwg&usqp=CAU'
+        return userInfo //status
+        
+    },
+    delete : function(id){
+        //hacer peticion axios
+        console.log('Eliminar id: '+id)
+        return true
+    },
+    save : function(userInfo){
+        //let URL = 'http://Idontknow';
+        let data = new FormData();
+
+        data.append('name', userInfo.name);
+        data.append('lastname', userInfo.lastname);
+        data.append('picture', userInfo.foto ); 
+        data.append('password', userInfo.password ); 
+
+       /* let config = {
+          header : {
+            'Content-Type' : 'image/png'
+          }
+        } */
+        
+        //let status = await axios.put( URL, data, config)
+        userInfo.picture =  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkvpndsXGCi_cMb-uef3UmHWlK64aQR9OA7g&usqp=CAU'
+        userInfo.location={
+            lat:3.442698,
+            lng:-76.533176
+        }
+        return userInfo //status
     }
 }
 
