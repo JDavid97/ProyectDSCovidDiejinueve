@@ -14,6 +14,7 @@
             
             <b-nav-item-dropdown right>
                 <template #button-content>
+                    <b class="user-name">{{ name }}</b>
                     <b-img :src="profilePicture" rounded="circle" alt="profile picture" class="navbar-profile-picture"></b-img>
                 </template>
                 <b-dropdown-item href="#">Perfil</b-dropdown-item>
@@ -29,6 +30,9 @@ export default {
     computed:{
         profilePicture(){
             return this.$store.state.oauth.userPicture
+        },
+        name(){
+            return this.$store.state.oauth.userName
         }
     },
     methods:{

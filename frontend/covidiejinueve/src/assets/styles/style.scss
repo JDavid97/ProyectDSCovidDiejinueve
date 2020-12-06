@@ -1,12 +1,41 @@
+.root-login{
+    background-image: url('../img/virus.png'), url('../img/virus.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position-x: -45%, 93%;
+    background-position-y: 116%, top;
+    background-size: 50%, 23%;
+    @media (min-width: 768px) {
+        background-image: url('../img/virus.png'), url('../img/virus.png'), url('../img/virus.png');
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-position-y: center, top, bottom;
+        background-position-x: 18%, 66%, 73%;
+        background-size: contain, 100px, 180px;
+    }
+}
+
 .navbar{
+    padding: 0.5rem 0.5rem;
+    .navbar-brand{
+        display: none;
+    }
     .dropup, .dropright, .dropdown, .dropleft {
         position: absolute;
         right: 0em;
         top: -1em;
 
         .dropdown-toggle{
+            color: #ffffff;
+            &::hover{
+                color: #ffffff;
+            }
+
             &::after{
                 display: none;
+            }
+
+            .user-name{
+                vertical-align: 40%;
+                padding-right: 0.5em;
             }
 
             .navbar-profile-picture{
@@ -22,8 +51,40 @@
     }
 
     @media (min-width: 768px) {
+        padding: 0.5rem 1rem;
+        .navbar-brand{
+            display: inline-block;
+        }
         .dropup, .dropright, .dropdown, .dropleft {
             right: 2em;
+        }
+    }
+}
+
+#main-sidebar{
+    .sidebar-menu{
+        list-style: none;
+        margin-top: 2em;
+        li{
+            padding: 1em;
+            cursor: pointer;
+            a{
+                color: #ffffff;
+                &::hover{
+                    color: #ffffff;
+                }
+                .b-icon{
+                    padding-right: 2em;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-menu{
+            li{
+                padding: 0.5em;
+            }
         }
     }
 }
