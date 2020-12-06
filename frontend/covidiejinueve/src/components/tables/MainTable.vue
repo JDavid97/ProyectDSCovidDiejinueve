@@ -2,7 +2,7 @@
     <div class="container-table">
       <div class="overflow-auto">
 
-        <b-button variant="success" v-b-modal.modal-create>Crear nuevo</b-button>
+        <b-button variant="info" v-b-modal.modal-create>➕ Crear nuevo</b-button>
 
         <b-table
           id="my-table"
@@ -10,19 +10,21 @@
           :fields="fields"
           :per-page="perPage"
           :current-page="currentPage"
-          small
+          hover
+          responsive="sm"
+          striped bordered borderless
         >
             <template #cell(picture)="data">
                 <b-img :src="data.item.picture" rounded alt="profile picture" width="50px" height="50px"></b-img>
             </template>
 
             <template #cell(actions)="row">
-              <b-button size="sm" @click="info(row.item)" class="mr-1">
-                Actualizar 
+              <b-button variant="info" size="sm" @click="info(row.item)" class="mr-1">
+                🔃 Actualizar
               </b-button>
 
-              <b-button danger size="sm" @click="comfirmDelete(row.item)" class="mr-1">
-                Eliminar 
+              <b-button variant="danger" size="sm" @click="comfirmDelete(row.item)" class="mr-1">
+                🗑️ Eliminar
               </b-button>
 
             </template>
@@ -36,7 +38,6 @@
           aria-controls="my-table"
         ></b-pagination>
 
-        <p class="mt-3">Pagina actual: {{ currentPage }}</p>
 
         <b-modal id="modal-create" ref="modal-create" :title="'Crear '+type" hide-footer>
           <UpdateForm v-on:updateFormulario="userCreate" type="create"></UpdateForm>

@@ -5,7 +5,7 @@
         <MainSidebar></MainSidebar>
         <Chat></Chat>
 
-        <div class="main-panel">
+        <div class="main-panel" :class="$route.name">
             <DashboardContent> </DashboardContent>
         </div>
         

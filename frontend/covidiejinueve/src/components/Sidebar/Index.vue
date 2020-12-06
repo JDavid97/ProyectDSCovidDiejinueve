@@ -23,22 +23,22 @@
         </b-list-group> -->
         <ul class="sidebar-menu">
             <li>
-                <b-link to="/cvd/map"><BIconGeoAlt></BIconGeoAlt> Mapa</b-link>
+                <b-link to="/cvd/map">🗺️ Mapa</b-link>
             </li>
             <li v-if="role == 'admin'">
-                <b-link to="/cvd/dashboard"><BIconBarChartFill></BIconBarChartFill> Dashboard</b-link>
+                <b-link to="/cvd/dashboard">📈 Dashboard</b-link>
             </li>
             <li v-if="role == 'admin'">
-                <b-link to="/cvd/doctor"><BIconHeartFill></BIconHeartFill> Doctor</b-link>
+                <b-link to="/cvd/doctor">❤️ Doctor</b-link>
             </li>
             <li v-if="adminOrDoc">
-                <b-link to="/cvd/paciente"><BIconThermometerHalf></BIconThermometerHalf> Pacientes</b-link>
+                <b-link to="/cvd/paciente">🤒 Pacientes</b-link>
             </li>
             <li v-if="role == 'admin'">
-                <b-link to="/cvd/admin"><BIconEmojiSunglasses></BIconEmojiSunglasses> Admin</b-link>
+                <b-link to="/cvd/admin">😎 Admin</b-link>
             </li>
             <li>
-                <b-link v-on:click="close"><BIconDoorOpenFill></BIconDoorOpenFill> Cerrar sesión</b-link>
+                <b-link v-on:click="close">📴 Cerrar sesión</b-link>
             </li>
         </ul>
       </div>
@@ -46,17 +46,17 @@
 </template>
 
 <script>
-import { BIconGeoAlt,BIconBarChartFill, BIconHeartFill, BIconThermometerHalf, BIconEmojiSunglasses, BIconDoorOpenFill } from 'bootstrap-vue'
+//import { BIconGeoAlt,BIconBarChartFill, BIconHeartFill, BIconThermometerHalf, BIconEmojiSunglasses, BIconDoorOpenFill } from 'bootstrap-vue'
 
 export default {
-    components:{
+   /* components:{
         BIconGeoAlt,
         BIconBarChartFill,
         BIconHeartFill,
         BIconThermometerHalf,
         BIconEmojiSunglasses,
         BIconDoorOpenFill
-    },
+    },*/
     computed :{
         role(){
             return this.$store.state.oauth.userRole
