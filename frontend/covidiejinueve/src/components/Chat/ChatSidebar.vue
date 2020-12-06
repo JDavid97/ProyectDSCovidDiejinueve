@@ -97,7 +97,6 @@ export default {
     var getContactsByType = (call) => {
        this.$store.dispatch(call)
          .then( data => {
-           console.log('LLamando a los contactos...'+call)
            let contactos = this.contacts
            console.log(contactos)
            contactos.push(...data)
