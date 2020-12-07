@@ -9,9 +9,41 @@ const oauthApi = {
                         {
                           logued:true,
                           user:{
+                              id:'001',
                               name:'Camilo',
                               lastname:'Arias',
-                              rol: 'admin'
+                              role: 'admin',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
+                          },
+                          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
+                        }
+                    )
+                }
+                else if(user.username == "Camilo48" & user.password == "2020GaMatt1999"){
+                    resolve(
+                        {
+                          logued:true,
+                          user:{
+                              id:'002',
+                              name:'Andres',
+                              lastname:'Arias',
+                              role: 'paciente',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
+                          },
+                          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
+                        }
+                    )
+                }
+                else if(user.username == "Camilo49" & user.password == "2020GaMatt1999"){
+                    resolve(
+                        {
+                          logued:true,
+                          user:{
+                              id:'003',
+                              name:'Andres',
+                              lastname:'Arias',
+                              role: 'doctor',
+                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }

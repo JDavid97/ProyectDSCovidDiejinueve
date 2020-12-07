@@ -5,24 +5,24 @@
         <ul>
           <li>
             <a href="#">
-              Acerca de nosotros
+              Acerca de nosotros 🙈
             </a>
           </li>
           <li>
             <a href="#">
-              Noticias
+              Noticias 📺
             </a>
           </li>
           <li>
             <a href="">
-              Comunidad
+              Comunidad 🤜🤛
             </a>
           </li>
         </ul>
       </nav>
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
-        <a href="#">Covid Diejinueve</a>, hecho en Cali, Colombia con <i class="fa fa-heart heart"></i>
+        <a href="#">Covid Diejinueve</a>, hecho en Cali, Colombia con ❤️
       </div>
     </div>
   </footer>
