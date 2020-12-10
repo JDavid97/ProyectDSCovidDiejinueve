@@ -1,0 +1,80 @@
+{% extends 'lista.html' %}
+
+{% block columns %}
+<tr>
+    <th scope="col">Nro</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellidos</th>
+    <th scope="col">Nombre de usuario</th>
+    <th scope="col">Tipo de usuario</th>
+    <th scope="col">Opción</th>
+</tr>
+{% endblock %}
+
+{% block rows %}
+
+
+{% for c in object_list %}
+
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.first_name }}</td>
+    <td>{{ c.last_name }}</td>
+    <td>{{ c.username }}</td>
+
+    <!-- {{ group }} -->
+    <td>{% for g in c.groups.all %}
+        <span class="badge badge-success">{{ g.name }}<br /></span>
+        {% endfor %}
+    </td>
+    <!-- <td>{{ c.groups }}</td> -->
+    <td>
+        <a href="{% url 'usuario:usuario_editar' c.id %}" class="btn btn-primary btn-xs btn-flat">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="{% url 'usuario:usuario_eliminar' c.id %}" class="btn btn-danger btn-xs btn-flat">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+<p></p>
+
+{% endblock %}
+
+{% block nuevoRegistro %}
+<div class="card-footer">
+    <a href="{{ url_crear }}" class="btn btn-primary btn-flat btnTest">
+        <i class="fas fa-plus"></i> Nuevo registro
+    </a>
+</div>
+{% endblock %}
+
+
+<!-- {% block javascript %}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('#data').DataTable({
+        "destroy": true,
+        "language": {
+            "lengthMenu":     "Mostrar _MENU_ registros",
+            "zeroRecords":    "No se encontraron resultados",
+            "emptyTable":     "Ningún dato disponible en esta tabla =(",
+            "info":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "infoPostFix":    "",
+            "sSearch":         "Buscar:",                        
+            "loadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                 "sPrevious": "Anterior"
+            },
+            "sProcessing": "Procesando..."
+            }           
+        });
+    });
+    </script>
+{% endblock %} -->

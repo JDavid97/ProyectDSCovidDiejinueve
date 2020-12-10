@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ title }}</title>
+    <link href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'usuario/js/form.js' %}"></script>
+    <link href="{% static 'img/favicon1.png' %}" rel="icon">
+    <!-- Custom styles for this template-->
+    <link href="{% static 'lib/startbootstrap-landing-page-gh-pages/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/startbootstrap-landing-page-gh-pages/css/sb-admin-2.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'lib/startbootstrap-landing-page-gh-pages/fontawesome-free/css/all.min.css' %}"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+
+    <script type="text/javascript" src="{% static 'lib/sweetalert2-9.10.0/sweetalert2.all.min.js' %}"></script>
+    <!-- Sweetalert2 -->
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-101 col-lg-12 col-md-9">
+
+                <div class="card1 o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">{{ title }} en Covid Diejinueve</h1>
+                            </div>
+                            <form method="post" action=".">
+                                <div class="card card-default">                                    
+                                    <div class="card-body">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="{{ action }}"> 
+                                        <!-- {% if form.errors %}
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                                x
+                                            </button>
+                                            <h5><i class="icon fas fa-ban"></i>Ha ocurrido un error al intentar guardar el registro</h5>
+                                            <ul>
+                                                {% for field in form %}
+                                                {% for error in field.errors %}
+                                                <li>{{ error }}</li>
+                                                {% endfor %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% endif %} -->
+                            
+                                        {% for field in form.visible_fields %}
+                                        <div class="form-group">
+                                            <label for="email"> {{ field.label }}:</label>
+                                            {{ field }}
+                                        </div>
+                                        {% endfor %}
+                                        <!--<div class="form-group">
+                                                <label for="email"> {{ form.nombres.label }}:</label>
+                                                {{ form.nombres }}
+                                            </div> -->
+                            
+                                    </div>
+                                    <div class="card-footer">            
+                                        <!-- {% block botton %}
+                                            
+                            
+                                        {% endblock %}   -->                                         
+                                        <!-- <br> -->
+                                        <button id="boton11" type="submit" class="btn3 btn-primary btn-flat">
+                                            <i class="fas fa-save"></i> Guardar registro
+                                        </button>  
+                                        <br>
+                                        <br>
+                                        <a href="{% url 'login' %}" type="submit" class="btn3 btn-danger btn-flat">
+                                            <i class="fas fa-window-close"></i> Cancelar
+                                        </a>  
+                                    </div>
+                                    
+                            
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+                            
+    <script>
+        {% if form.errors %}
+            var errors = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n\n';  
+            {% endfor %}
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: errors,
+            });
+        {% endif %} 
+    </script>                       
+                                                                                                                        
+                        
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
+    </script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/vendor/jquery-easing/jquery.easing.min.js' %}">
+    </script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'lib/startbootstrap-landing-page-gh-pages/js/sb-admin-2.min.js' %}"></script>
+
+</body>
+
+</html>
