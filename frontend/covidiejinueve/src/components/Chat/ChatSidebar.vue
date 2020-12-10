@@ -34,8 +34,14 @@
 <script>
 import Contact from './Contacts.vue'
 import MessageBox from './MessageBox.vue'
+/*import io from 'socket.io-client';
+  let socket = io('http://localhost:3001',{
+    transports : ['websocket', 'polling'],
+    //withCredentials: false
+  }); */
 
 export default {
+  name : 'ChatSidebar',
   components:{
     Contact,
     MessageBox
@@ -50,13 +56,20 @@ export default {
       roleUserChat: '',
       contacts: [],
       chat:[],
-      newMsg : ""
+      newMsg : "",
+      conected:false
     }
   },
   computed:{
     toogleChat : function(){
       return !this.toogleContacts
     }
+  },
+  sockets: {
+        connect() {
+            this.conected = true;
+            console.log('socket connected')
+        }
   },
   methods:{
     toogle: function(user){
@@ -88,6 +101,11 @@ export default {
   },
   created(){
     //var _this = this
+    /*
+    socket.on('connect', () => {
+        this.conected = true
+        console.log('Connected!');
+    }); */
     
     var getContacts = { 
       paciente : 'doctores/getDoctores',

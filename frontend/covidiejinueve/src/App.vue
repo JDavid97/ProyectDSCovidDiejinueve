@@ -4,8 +4,6 @@
 
 <script>
 export default {
-
-
 }
 
 </script>
