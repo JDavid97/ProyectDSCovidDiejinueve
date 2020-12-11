@@ -13,4 +13,18 @@ urlpatterns = [
     path('tipo/grupo/<int:pk>/', UsuarioGrupo.as_view(), name='usuario_grupo'),
     path('informe/', UsuarioInformesPdf.as_view(), name='usuario_informe'),
     path('lista/pdf/', UsuarioPdfView.as_view(), name='usuario_lista_pdf'),
+<<<<<<< HEAD
+=======
+
+    path('login/', LoginUser.as_view()), #Ruta para loguear
+    path('users/', ListUsers.as_view()), #Ruta para Listar Usuarios en general
+    path('user/<int:pk>', ListUser.as_view()), #Ruta para Listar un Usuario
+    path('pacientes/', ListPacientes.as_view()), #Ruta para Listar Pacientes
+    path('administradores/', ListAdministradores.as_view()), #Ruta para Listar Pacientes
+    path('doctores/', ListDoctores.as_view()),
+    path('agregar/', RegisterUser.as_view()),
+    path('agregarpaciente/', RegisterPaciente.as_view()),
+    path('actualizar/<int:pk>', UpdateUser.as_view()),
+    path('eliminar/<int:pk>', UpdateUser.as_view()),
+>>>>>>> jdavid97
 ]

@@ -16,48 +16,57 @@ export default {
             .then(data => {
                 commit('SET_PACIENTES',data)
                 return data;
-            })
+            }).catch(()=>{console.log("Error console log")})
     },
     updatePacientes({commit,state},data){
-      let result = pacientesApi.update(data);
       let position
-
-      if(result){
-        let user = state.pacientes.find((p, index) => {
-          if(p.id === data.id){
-            position = index
-            return p
+      pacientesApi.update(data).then(
+        result => {
+          if(result.status == 200){
+            let user = state.pacientes.find((d, index) => {
+              if(d.id === result.data.id){
+                position = index
+                return result.data
+              }
+            });
+            if (user) {
+                user.name = result.data.first_name;
+                user.lastname = result.data.last_name,
+                user.picture = result.data.picture;
+            }
+    
+            let doctors = state.pacientes
+            doctors[position] = user
+            commit('SET_PACIENTES', doctors) 
+            return true
+          }else{
+            return false
           }
-        });
-        if (user) {
-            user.name = result.name;
-            user.lastname = result.lastname,
-            user.picture = result.picture;
         }
-
-        let oldPacientes = state.pacientes
-        oldPacientes[position] = user
-        let newPacientes = oldPacientes
-        commit('SET_PACIENTES', newPacientes) 
-      }
-      
-      return result ? true : false
+      )
     },
     deletepaciente({commit,state},id){
-        let status = pacientesApi.delete(id)
-        if(status){
-          commit('SET_PACIENTES', state.pacientes.filter( paci => paci.id != id)) 
-        }
-        return status;
+      pacientesApi.delete(id).then(()=>{
+        commit('SET_PACIENTES', state.pacientes.filter( doc => doc.id != id)) 
+      })
+      return true;
     },
     create({commit,state},data){
-      let result = pacientesApi.save(data);
-      if(result){
-        let pacientes = state.pacientes
-        pacientes.unshift(result)
-        commit('SET_PACIENTES', pacientes)
-      }
-      return result ? result : false
+      pacientesApi.save(data).then(result=>{
+        if(result.data.user){
+          let pacientes = state.pacientes
+          var usuario = []
+          usuario.id = result.data.user.id
+          usuario.name = result.data.user.first_name
+          usuario.lastname = result.data.user.last_name
+          usuario.picture = result.data.user.picture
+          pacientes.unshift(usuario)
+          commit('SET_PACIENTES', pacientes)
+          return true
+        }else{
+          return false
+        }
+      })
     }
   }
 }

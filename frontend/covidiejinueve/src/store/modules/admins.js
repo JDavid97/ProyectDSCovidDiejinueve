@@ -18,45 +18,60 @@ export default {
                 return data;
             })
     },
+
     update({commit,state},data){
-      let result = adminsApi.update(data);
       let position
-
-      if(result){
-        let user = state.admins.find((d, index) => {
-          if(d.id === data.id){
-            position = index
-            return d
+      adminsApi.update(data).then(
+        result => {
+          console.log(result)
+          if(result.status == 200){
+            let user = state.admins.find((d, index) => {
+              if(d.id === result.data.id){
+                position = index
+                return result.data
+              }
+            });
+            if (user) {
+                user.name = result.data.first_name;
+                user.lastname = result.data.last_name,
+                user.picture = result.data.picture;
+            }    
+            let administradores = state.admins
+            administradores[position] = user
+            commit('SET_ADMINS', administradores) 
+            return true
+          }else{
+            return false
           }
-        });
-        if (user) {
-            user.name = result.name;
-            user.lastname = result.lastname,
-            user.picture = result.picture;
         }
+      )
+    },
 
-        let admins = state.admins
-        admins[position] = user
-        commit('SET_ADMINS', admins) 
-      }
-      
-      return result ? true : false
-    },
     delete({commit,state},id){
-        let status = adminsApi.delete(id)
-        if(status){
-          commit('SET_ADMINS', state.admins.filter( admin => admin.id != id)) 
-        }
-        return status;
+      adminsApi.delete(id).then(()=>{
+        commit('SET_ADMINS', state.admins.filter( doc => doc.id != id)) 
+      })
+      return true;
     },
+
     create({commit,state},data){
-      let result = adminsApi.save(data);
-      if(result){
-        let admins = state.admins
-        admins.unshift(result)
-        commit('SET_ADMINS', admins)
-      }
-      return result ? result : false
+      adminsApi.save(data).then(result=>{
+        console.log(result)
+        if(result.data.user){
+          let admins = state.admins
+          var usuario = []
+          usuario.id = result.data.user.id
+          usuario.name = result.data.user.first_name
+          usuario.lastname = result.data.user.last_name
+          usuario.picture = result.data.user.picture
+          admins.unshift(usuario)
+          commit('SET_ADMINS', admins)
+          return true
+        }else{
+          return false
+        }
+      })
+
     }
   }
 }

@@ -1,3 +1,6 @@
 frontend/node_modules
+<<<<<<< HEAD
 backendChat/node_modules
+=======
+>>>>>>> jdavid97
 frontend/public/js/bundle.js

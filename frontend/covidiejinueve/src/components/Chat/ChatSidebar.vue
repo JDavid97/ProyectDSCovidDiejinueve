@@ -36,7 +36,10 @@ import Contact from './Contacts.vue'
 import MessageBox from './MessageBox.vue'
 
 export default {
+
   name : 'ChatSidebar',
+
+
   components:{
     Contact,
     MessageBox
@@ -49,13 +52,16 @@ export default {
         userId:0
       },
       roleUserChat: '',
+
       newMsg : "",
       conected:false
+
     }
   },
   computed:{
     toogleChat : function(){
       return !this.toogleContacts
+
     },
     contacts: function(){
       return this.$store.state.chat.contacts
@@ -72,12 +78,15 @@ export default {
       this.$socket.client.emit('oauth', {id:this.$store.state.oauth.userId});
     },
   }, 
+
   methods:{
     toogle: function(user){
       this.msgTo.nameUserChat = user.name
       this.msgTo.userId = user.id
       this.roleUserChat = user.role
+
       if(user.id != 0){ //si entro a un chat con alguien
+
         this.getMessages(user.id)
       }
       this.toogleContacts = !this.toogleContacts
@@ -90,6 +99,7 @@ export default {
       this.$store.commit('chat/SEND_MSG',{
         message:{
           from:this.$store.state.oauth.userId,
+
           to: this.msgTo.userId,
           message: this.newMsg
         },
@@ -100,6 +110,7 @@ export default {
   },
   created(){
     this.$store.dispatch('chat/setContacts')
+
   }
 }
 </script>

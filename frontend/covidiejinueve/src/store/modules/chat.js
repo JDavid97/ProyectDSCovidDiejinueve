@@ -6,6 +6,7 @@ export default {
     chats:[],
     contacts:[],
     currentChat:[]
+
   },
   mutations: {
    SET_CHATS(state, chats){

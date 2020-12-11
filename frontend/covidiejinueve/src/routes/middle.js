@@ -12,7 +12,9 @@ const router = new VueRouter({
   var accessRoles = (admin, doctor) => {
     return new Promise( (resolve, reject) => {
         let userRole = store.state.oauth.userRole
-        if(admin && userRole == "admin" || doctor &&  userRole == "doctor") resolve()
+
+        if(admin && userRole == "Administrador" || doctor &&  userRole == "Doctor") resolve()
+
         reject()
     })
   } 

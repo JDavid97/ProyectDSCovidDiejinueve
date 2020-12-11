@@ -19,44 +19,58 @@ export default {
             })
     },
     update({commit,state},data){
-      let result = doctoresApi.update(data);
       let position
-
-      if(result){
-        let user = state.doctores.find((d, index) => {
-          if(d.id === data.id){
-            position = index
-            return d
+      doctoresApi.update(data).then(
+        result => {
+          console.log(result)
+          if(result.status == 200){
+            let user = state.doctores.find((d, index) => {
+              if(d.id === result.data.id){
+                position = index
+                return result.data
+              }
+            });
+            if (user) {
+                user.name = result.data.first_name;
+                user.lastname = result.data.last_name,
+                user.picture = result.data.picture;
+            }
+    
+            let doctors = state.doctores
+            doctors[position] = user
+            commit('SET_DOCTORES', doctors) 
+            return true
+          }else{
+            return false
           }
-        });
-        if (user) {
-            user.name = result.name;
-            user.lastname = result.lastname,
-            user.picture = result.picture;
         }
-
-        let doctors = state.doctores
-        doctors[position] = user
-        commit('SET_DOCTORES', doctors) 
-      }
-      
-      return result ? true : false
+      )
     },
+    
     delete({commit,state},id){
-        let status = doctoresApi.delete(id)
-        if(status){
+        doctoresApi.delete(id).then(()=>{
           commit('SET_DOCTORES', state.doctores.filter( doc => doc.id != id)) 
-        }
-        return status;
+        })
+        return true;
     },
+
     create({commit,state},data){
-      let result = doctoresApi.save(data);
-      if(result){
-        let doctores = state.doctores
-        doctores.unshift(result)
-        commit('SET_DOCTORES', doctores)
-      }
-      return result ? result : false
+      doctoresApi.save(data).then(result=>{
+        console.log(result)
+        if(result.data.user){
+          let doctores = state.doctores
+          var usuario = []
+          usuario.id = result.data.user.id
+          usuario.name = result.data.user.first_name
+          usuario.lastname = result.data.user.last_name
+          usuario.picture = result.data.user.picture
+          doctores.unshift(usuario)
+          commit('SET_DOCTORES', doctores)
+          return true
+        }else{
+          return false
+        }
+      })
     }
   }
 }

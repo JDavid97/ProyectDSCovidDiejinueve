@@ -19,8 +19,100 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
+<<<<<<< HEAD
 # Create your views here.
 
+=======
+from rest_framework import status, generics, mixins
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from knox.models import AuthToken
+from django.shortcuts import get_object_or_404
+from .serializer import RegisterSerializer,UserSerializer,UserPacienteSerializer,UserAministradorSerializer,UserDoctorSerializer,UserLoginSerializer,LoginSerializer,UpdateUserSerializer,RegisterPacientesSerializer
+
+#Listar usuarios
+class ListUsers(generics.ListAPIView): 
+    queryset = Usuario.objects.all()
+    serializer_class = UserSerializer
+
+class ListPacientes(generics.ListAPIView): 
+    queryset = Usuario.objects.filter(role='Paciente')
+    serializer_class = UserPacienteSerializer        
+                
+class ListAdministradores(generics.ListAPIView): 
+    queryset = Usuario.objects.filter(role='Administrador')
+    serializer_class = UserAministradorSerializer 
+
+class ListDoctores(generics.ListAPIView): 
+    queryset = Usuario.objects.filter(role='Doctor')
+    serializer_class = UserDoctorSerializer
+
+class ListUser(generics.ListAPIView):
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        pk=self.kwargs['pk']
+        if Usuario.objects.filter(id=pk).exists():
+            return Usuario.objects.filter(id=pk)
+#Registrar usuarios
+class RegisterUser(generics.GenericAPIView): 
+    
+    def post(self, request): 
+        serializer = RegisterSerializer(data=request.data)
+        print(serializer.is_valid())
+        if serializer.is_valid(): 
+            user= serializer.save() 
+            token= AuthToken.objects.create(user)
+            
+            print(token[1])
+            return Response({"user": UserSerializer(user).data}, status= status.HTTP_201_CREATED )
+        else: 
+            return Response("Este usuario ya existe",status= status.HTTP_400_BAD_REQUEST)
+
+#Registrar paciente usuarios
+class RegisterPaciente(generics.GenericAPIView): 
+    
+    def post(self, request): 
+        serializer = RegisterPacientesSerializer(data=request.data)
+        print(serializer.is_valid())
+        if serializer.is_valid(): 
+            user= serializer.save() 
+            token= AuthToken.objects.create(user)
+            
+            print(token[1])
+            return Response({"user": UserSerializer(user).data}, status= status.HTTP_201_CREATED )
+        else: 
+            return Response("Este usuario ya existe",status= status.HTTP_400_BAD_REQUEST)
+
+#Login usuarios        
+class LoginUser(generics.GenericAPIView):
+     serializer_class = LoginSerializer
+     
+     def post (self, request, *args, **kwargs):
+        serializer= self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        token= AuthToken.objects.create(user)
+        return Response({
+             "logued": True,
+             "user": UserLoginSerializer(user).data, 
+             "token": token[1]
+            }, status= status.HTTP_201_CREATED)
+
+class UpdateUser(generics.RetrieveAPIView,mixins.DestroyModelMixin,mixins.UpdateModelMixin):
+    serializer_class = UpdateUserSerializer
+
+    def get_object(self):
+        pk = self.kwargs["pk"]
+        obj = get_object_or_404(Usuario, pk=pk)
+        return obj
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+            
+>>>>>>> jdavid97
 class UsuarioListarView(LoginRequiredMixin, ListView):
     model = Usuario    
     # fields = 'first_name', 'last_name', 'email', 'username', 'password', 'groups'

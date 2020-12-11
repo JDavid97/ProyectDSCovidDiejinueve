@@ -15,7 +15,9 @@ export default {
 
         this.$store.state.pacientes.pacientes.forEach(paci => {
             var markerCam = new google.maps.Marker({
-                position: new google.maps.LatLng( paci.location.lat, paci.location.lng),
+
+                position: new google.maps.LatLng( paci.lttd, paci.lngtd),
+
                 title: paci.name,
                 map:map
             });

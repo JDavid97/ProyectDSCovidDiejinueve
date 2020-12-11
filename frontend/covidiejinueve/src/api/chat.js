@@ -1,6 +1,9 @@
 const chatApi = {
     getChat(from, to){
+
         return new Promise( (resolve) =>{
+
+
             setTimeout( ()=>{
                 if(from == '001' & to == '011'){
                     resolve([
@@ -146,6 +149,7 @@ const chatApi = {
                         }
                     ])
                 }
+
                 if(from == '001' & to == '003'){
                     resolve([
                         {
@@ -183,6 +187,7 @@ const chatApi = {
                     ])
                 }
                 resolve([])
+
             },600)
         })
     }

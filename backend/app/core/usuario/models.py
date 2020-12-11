@@ -25,8 +25,19 @@ class Usuario(AbstractUser):
     nmro_idntfccn = models.CharField(max_length=50, verbose_name='Nro Identificación', null=True)
     tlfno = models.CharField(max_length=50, verbose_name='Telefono', null=True)
     nmro_unco_idntfccn_gnro = models.ForeignKey(Genero, on_delete=models.CASCADE, verbose_name='Genero', null=True)
+<<<<<<< HEAD
     lngtd = models.IntegerField(verbose_name='Longitud', null=True)
     lttd = models.IntegerField(verbose_name='Latitud', null=True)
+=======
+    lngtd = models.CharField(max_length=50, verbose_name='Longitud', null=True)
+    lttd = models.CharField(max_length=50, verbose_name='Latitud', null=True)
+    picture = models.CharField(max_length=255, verbose_name='Imagen de usuario', null = True)
+    role = models.CharField(max_length=50, verbose_name='Rol de usuario', null = True)
+    genero = models.CharField(max_length=50, verbose_name='Genero de usuario', null = True)
+
+
+
+>>>>>>> jdavid97
 
 
     def toJSON(self):

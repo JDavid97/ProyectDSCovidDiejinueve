@@ -27,7 +27,14 @@ SECRET_KEY = 't#t#m+x%ga&=_eb9#i0k788)r!re5ixtdxglqdk#tm1)&m-sey'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
+=======
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1'
+    ]
+>>>>>>> jdavid97
 
 # Application definition
 
@@ -39,15 +46,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     #libs
     # 'widget_tweaks',
     # Apps
+=======
+    'rest_framework',
+    'rest_framework.authtoken',
+    #libs
+    # 'widget_tweaks',
+    # Apps
+    'knox',
+>>>>>>> jdavid97
     'core.erp',
     'core.homepage',
     'core.login',
     'core.usuario',
+<<<<<<< HEAD
     'core.chat'
     
+=======
+    'core.chat',
+    'corsheaders', 
+>>>>>>> jdavid97
 ]
 
 MIDDLEWARE = [
@@ -58,7 +79,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'crum.CurrentRequestUserMiddleware'
+=======
+    'crum.CurrentRequestUserMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
+>>>>>>> jdavid97
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -79,6 +106,17 @@ TEMPLATES = [
     },
 ]
 
+<<<<<<< HEAD
+=======
+CORS_ORIGIN_ALLOW_ALL= True
+
+CORS_ORIGIN_WHITE_LIST = (
+    'localhost:8080'
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+>>>>>>> jdavid97
 WSGI_APPLICATION = 'app.wsgi.application'
 
 ASGI_APPLICATION = 'app.routing.application'
