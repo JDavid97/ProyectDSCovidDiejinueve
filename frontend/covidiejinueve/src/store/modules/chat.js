@@ -17,7 +17,9 @@ export default {
     console.log(state.chats)
    },
    SET_CONTACTS(state,contacts){
+     console.log("ContactosASD", contacts)
      state.contacts = [...state.contacts, ...contacts]   
+     console.log("Holaquehace", state.contacts)
    },
    SEND_MSG(state, msg){
      let chats = state.chats
@@ -122,8 +124,7 @@ export default {
               })
           }
           
-          //if(rootState.oauth.userRole == "Administrador" || rootState.oauth.userRole == "Doctor"){
-          if(rootState.oauth.userRole == "admin" || rootState.oauth.userRole == "doctor"){
+          if(rootState.oauth.userRole == "Administrador" || rootState.oauth.userRole == "Doctor"){          
             if(rootState.doctores.doctores.length > 0){
               commit('SET_CONTACTS',rootState.doctores.doctores)
             }

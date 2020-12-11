@@ -19,10 +19,6 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
-<<<<<<< HEAD
-# Create your views here.
-
-=======
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -112,7 +108,6 @@ class UpdateUser(generics.RetrieveAPIView,mixins.DestroyModelMixin,mixins.Update
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
             
->>>>>>> jdavid97
 class UsuarioListarView(LoginRequiredMixin, ListView):
     model = Usuario    
     # fields = 'first_name', 'last_name', 'email', 'username', 'password', 'groups'
