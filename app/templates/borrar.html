@@ -1,0 +1,35 @@
+{% extends 'body.html' %}
+
+{% block content %}
+<form method="post" action="#">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-trash"></i>                
+                {{ title }}              
+            </h3>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="{{ action }}"> 
+
+
+            <div class="alert alert-danger alert-dismissible">
+                <h5><i class="icon fas fa-ban"></i> Notificación!</h5>
+                {% block nombre %} {% endblock %}?
+            </div>
+        </div>
+        <div class="card-footer">          
+            {% block botton %}
+
+            {% endblock %}
+            <button id="btnAcept" type="submit" class="btn btn-primary btn-flat">
+                <i class="fas fa-save"></i> Si, aceptar                
+            </button>  
+                        
+        </div>
+
+    </div>
+</form>
+
+{% endblock %}
