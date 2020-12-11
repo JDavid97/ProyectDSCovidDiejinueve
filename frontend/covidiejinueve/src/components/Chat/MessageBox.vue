@@ -6,7 +6,7 @@
               </b-button>
           </div>
           <div class="messages-container mt-4">
-            <Message v-for="(msg,index) in chat" v-bind:key="index" :from="msg.from" :message="msg.message"></Message>
+            <Message v-for="(msg,index) in chat[0]" v-bind:key="index" :from="msg.from" :message="msg.message"></Message>
           </div>
     </b-card>
 </template>
@@ -16,11 +16,6 @@ import Message from './Message.vue'
 import { BIconArrowLeftShort } from 'bootstrap-vue'
 export default {
     props:['chat'],
-    data(){
-        return{
-            chats : []
-        }
-    },
     components:{
         Message,
         BIconArrowLeftShort

@@ -1,6 +1,6 @@
 const chatApi = {
     getChat(from, to){
-        return new Promise( resolve =>{
+        return new Promise( (resolve) =>{
             setTimeout( ()=>{
                 if(from == '001' & to == '011'){
                     resolve([
@@ -146,6 +146,43 @@ const chatApi = {
                         }
                     ])
                 }
+                if(from == '001' & to == '003'){
+                    resolve([
+                        {
+                            from:'001', to: '003', timestamp: '11-09-2020 10:05:26', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'001', to: '003', timestamp: '11-09-2020 10:05:26', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'003', to: '001', timestamp: '11-09-2020 10:05:28', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'003', to: '001', timestamp: '11-09-2020 10:05:28', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'003', to: '001', timestamp: '11-09-2020 10:05:29', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'003', to: '001', timestamp: '11-09-2020 10:05:30', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'001', to: '003', timestamp: '11-09-2020 10:05:31', 
+                            message: "Hola"
+                        },
+                        {
+                            from:'003', to: '011', timestamp: '11-09-2020 10:05:32', 
+                            message: "Hola"
+                        }
+                    ])
+                }
+                resolve([])
             },600)
         })
     }
