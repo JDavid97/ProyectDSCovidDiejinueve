@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import VueSocketIO from 'vue-socket.io'
-import socketio from 'socket.io-client'
+import VueSocketIOExt from 'vue-socket.io-extended';
+import io from 'socket.io-client'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import App from './App.vue'
@@ -17,18 +17,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './assets/styles/style.scss'
 
-Vue.use(new VueSocketIO({
-  debug: true,
-  connection: socketio('http://localhost:3001',{
-    transports : ['websocket', 'polling'],
-    withCredentials: false
-  }),
-  vuex: {
-      store,
-      actionPrefix: 'SOCKET_',
-      mutationPrefix: 'SOCKET_'
-  },
-})) 
+const socket = io('http://localhost:3001',{
+  transports : ['websocket'],
+  withCredentials: false
+});
+ 
+Vue.use(VueSocketIOExt, socket, { store });
+
 
 new Vue({
   render: h => h(App),

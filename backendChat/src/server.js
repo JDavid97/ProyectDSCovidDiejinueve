@@ -1,32 +1,51 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http,{
-       
         transports: ['websocket', 'polling']
       });
 
-
-//yes I do not need Origin for now but for production I will use it.
+//Cors
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
-
   next();
 });
 
-app.get('/', (req, res) => {
-  let time = setInterval(() => {
-    res.send(JSON.stringify(process.memoryUsage()));
-  },100);
-});
+//users Conected
+var users = [] 
 
-io.sockets.on('connection', socket => {
-    console.log('conectado!')
+
+//Sockets
+io.on('connection', socket => {
+  console.log('conectado!')
+
+  socket.on("oauth", identify =>{
+    users.push({socketId: socket.id, userId: identify.id})
+    console.log('Users:')
+    console.log(users)
+  })
+
+  socket.on("send_message", (msg) => {
+    console.log('MENSAJE ENVIADO')
+    console.log(msg)
+    console.log('USUARIOS:')
+    console.log(users)
+    let to = users.find(user => user.userId == msg.message.to)
+    console.log(to)
+    console.log(to.socketId)
+    socket.to(to.socketId).emit("new_message", msg);
+  });
+
   socket.on('disconnect', () => {
+    console.log('Desconectado')
+    users = users.filter(user => user.socketId != socket.id)
+    console.log(users)
   });
 });
 
+
+//start Server
 http.listen(3001, () => {
   console.log('Listening on *:3001');
 });

@@ -34,11 +34,6 @@
 <script>
 import Contact from './Contacts.vue'
 import MessageBox from './MessageBox.vue'
-/*import io from 'socket.io-client';
-  let socket = io('http://localhost:3001',{
-    transports : ['websocket', 'polling'],
-    //withCredentials: false
-  }); */
 
 export default {
   name : 'ChatSidebar',
@@ -54,8 +49,6 @@ export default {
         userId:0
       },
       roleUserChat: '',
-      contacts: [],
-      chat:[],
       newMsg : "",
       conected:false
     }
@@ -63,75 +56,50 @@ export default {
   computed:{
     toogleChat : function(){
       return !this.toogleContacts
+    },
+    contacts: function(){
+      return this.$store.state.chat.contacts
+    },
+    chat: function(){
+      console.log('cambio el chat por', this.$store.state.chat.currentChat)
+      return this.$store.state.chat.currentChat
     }
   },
-  sockets: {
-        connect() {
-            this.conected = true;
-            console.log('socket connected')
-        }
-  },
+   sockets: {
+    connect() {
+      this.conected = true
+      console.log('socket connected')
+      this.$socket.client.emit('oauth', {id:this.$store.state.oauth.userId});
+    },
+  }, 
   methods:{
     toogle: function(user){
       this.msgTo.nameUserChat = user.name
       this.msgTo.userId = user.id
       this.roleUserChat = user.role
-      if(user.id != 0){
+      if(user.id != 0){ //si entro a un chat con alguien
         this.getMessages(user.id)
       }
       this.toogleContacts = !this.toogleContacts
     },
     getMessages: function(chatWithUserId){
       this.$store.dispatch('chat/getChat', {from:this.$store.state.oauth.userId, to:chatWithUserId})
-                .then( data => {
-                     this.chat = data
-                })
+
     },
     sendText: function(){
       this.$store.commit('chat/SEND_MSG',{
         message:{
           from:this.$store.state.oauth.userId,
-          to: this.chat[0].to,
+          to: this.msgTo.userId,
           message: this.newMsg
         },
-        position: this.chat.position
-        })
-        this.newMsg = ""
+        position: this.$store.state.chat.currentChat.position
+      })
+      this.newMsg = ""
     }
   },
   created(){
-    //var _this = this
-    /*
-    socket.on('connect', () => {
-        this.conected = true
-        console.log('Connected!');
-    }); */
-    
-    var getContacts = { 
-      paciente : 'doctores/getDoctores',
-      doctor : 'pacientes/getPacientes'
-    }
-
-    var getContactsByType = (call) => {
-       this.$store.dispatch(call)
-         .then( data => {
-           let contactos = this.contacts
-           console.log(contactos)
-           contactos.push(...data)
-           console.log(contactos)
-
-           this.contacts = contactos
-         })
-    }
-
-    var callMethod = getContacts.paciente
-
-    if(this.$store.state.oauth.userRole == "doctor") callMethod = getContacts.doctor
-
-    getContactsByType(callMethod)
-  
-    if(this.$store.state.oauth.userRole == "admin") getContactsByType(getContacts.doctor)
-   
+    this.$store.dispatch('chat/setContacts')
   }
 }
 </script>

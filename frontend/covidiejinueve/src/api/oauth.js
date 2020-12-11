@@ -25,10 +25,10 @@ const oauthApi = {
                           logued:true,
                           user:{
                               id:'002',
-                              name:'Andres',
-                              lastname:'Arias',
+                              name:'Maria',
+                              lastname:'Paela',
                               role: 'paciente',
-                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
+                              picture : 'https://cdn.bioguia.com/embed/1bfc9cc8a23ce4d1f518abf591da97341529442379/0_mujernovaalbao.JPG'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }
@@ -39,11 +39,11 @@ const oauthApi = {
                         {
                           logued:true,
                           user:{
-                              id:'003',
-                              name:'Andres',
-                              lastname:'Arias',
+                              id:'011',
+                              name:'Antony',
+                              lastname:'Burdein',
                               role: 'doctor',
-                              picture : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJNCUkdxlI_BovMk95jUUn7wqhGEB242s-og&usqp=CAU'
+                              picture : 'https://cxl.com/wp-content/uploads/2016/03/nate_munger.png'
                           },
                           token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJhZG1pbiIsIm5hbWUiOiJDYW1pbG8gQXJpYXMiLCJpYXQiOjE1MTYyMzkwMjJ9.98s2PEzU3yvQo1ZT4kFrrUeTIZ9P1x0RuRt3lZoWwDg'
                         }
